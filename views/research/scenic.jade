@@ -1,0 +1,100 @@
+extends ../public/layout
+
+block content
+    div.container-fuild
+        .row
+            .col-md-10.col-md-offset-1.scenic-title
+                h3 白金时尚购物中心
+            .col-md-10.col-md-offset-1.scenic-navbar
+                div.row(id="scenic-navbar")
+                    ul(class="scenic-navbar-ul")
+                        li.active
+                            a(href="#scenic-message") 概括
+                        li
+                            a(href="#scenic-intro") 简介
+                        li
+                            a(href="#scenic-comment") 评论信息
+
+        div.row.scroll-content
+            div.scenic-section.row(id="scenic-message")
+                .col-md-10.col-md-offset-1
+                    .message-left
+                        .message-left-top
+                            span.message-tag 标签：
+                            p(class="tag")
+                                span 便宜
+                                span 繁多
+                                span 不同
+                                span BUY
+                        .message-left-bottom
+                            p.message-score 星级评价：
+                            p(class="score-show")
+                                span 中:&nbsp;
+                                    i(class="fa fa-star" aria-hidden="true")
+                                    i(class="fa fa-star" aria-hidden="true")
+                                    i(class="fa fa-star" aria-hidden="true")
+                                    i(class="fa fa-star" aria-hidden="true")
+                            p(class="score-show")
+                                span 美:&nbsp;
+                                    i(class="fa fa-star" aria-hidden="true")
+                                    i(class="fa fa-star" aria-hidden="true")
+                                    i(class="fa fa-star" aria-hidden="true")
+                            p(class="score-show")
+                                span 泰:&nbsp;
+                                    i(class="fa fa-star" aria-hidden="true")
+                                    i(class="fa fa-star" aria-hidden="true")
+
+
+                    .message-right
+                        div(id="carousel-example-generic" class="row carousel slide scenic-slide" data-ride="carousel")
+                            ol(class="carousel-indicators")
+                                li(data-target="#carousel-example-generic" data-slide-to="0" class="active")
+                                li(data-target="#carousel-example-generic" data-slide-to="1")
+                                li(data-target="#carousel-example-generic" data-slide-to="2")
+                            div(class="carousel-inner" role="listbox")
+                                div(class="item active")
+                                    img(src="/image/index_sea/sea1.jpg" alt="泰好玩")
+                                div(class="item")
+                                    img(src="/image/index_sea/sea2.jpg" alt="泰好玩")
+                                div(class="item")
+                                    img(src="/image/index_sea/sea3.jpg" alt="泰好玩")
+                            a(class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev")
+                                span(class="glyphicon glyphicon-chevron-left" aria-hidden="true")
+                                span(class="sr-only") Previous
+                            a(class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next")
+                                span(class="glyphicon glyphicon-chevron-right" aria-hidden="true")
+                                span(class="sr-only") Next
+            div.scenic-section.row(id="scenic-intro")
+                .col-md-10.col-md-offset-1
+                    h4 景点简介
+                    p 白金时尚购物中心如同乍都乍周末市场的室内版。它专营批发时尚服装和配件，有四层购物空间，入驻多达 1,300 家商铺。在这里，讨价还价是乐趣的一部分，买的越多越便宜。白金时尚购物中心位于水门市场的中心，从 Ratchathewi 或奇隆 BTS 轻轨站步行只需 10 分钟，交通比其他同等规模的服装市场更加便利。此外它有空调和一座大型美食广场，以及咖啡厅和快餐连锁店。顶层甚至还有一座四星级酒店，即水门诺富特曼谷铂金酒店。说到一站式采购物美价廉的服装和配件，白金时尚购物中心无疑是最佳选择。
+                        | 这里不讲什么概念；它是一个批发购物中心，到处都是小卖场，主要销售女士时装和配件。白金时尚购物中心的每一层都用全球著名的购物区命名，也就是乌节路、弥顿道、银座、苏荷区、牛津和康登街。大体上，四层的零售购物空间专营男女装、皮革制品、鞋和时尚配件。 款式繁多，应有尽有，令人震撼。从童装、青少年装、牛仔裤、睡衣、内衣和超大号服装到假发、腰带、鞋、手包、帽子和化妆品，无所不包。专营店也很有趣，提供来自韩国、香港、日本、中国、印度的进口时装，以及冷门时装，例如超大号服装、老年女士服装、雪纺裙、牛仔服、戏服等。 基本上这里的商品可将您从头到脚装扮起来，因此混搭是个好主意，并在闲逛时贴合您的想法。看到喜欢的东西不要犹豫，否则可能就找不到了。
+                        | 白金时尚购物中心如同乍都乍周末市场的室内版。它专营批发时尚服装和配件，有四层购物空间，入驻多达 1,300 家商铺。在这里，讨价还价是乐趣的一部分，买的越多越便宜。白金时尚购物中心位于水门市场的中心，从 Ratchathewi 或奇隆 BTS 轻轨站步行只需 10 分钟，交通比其他同等规模的服装市场更加便利。此外它有空调和一座大型美食广场，以及咖啡厅和快餐连锁店。顶层甚至还有一座四星级酒店，即水门诺富特曼谷铂金酒店。说到一站式采购物美价廉的服装和配件，白金时尚购物中心无疑是最佳选择。
+                        | 这里不讲什么概念；它是一个批发购物中心，到处都是小卖场，主要销售女士时装和配件。白金时尚购物中心的每一层都
+            div.scenic-section.row(id="scenic-comment")
+                .col-md-10.col-md-offset-1
+                    h4 评价详情
+                    p.selection
+                        span.span_active 中
+                        span 美
+                        span 泰
+
+                .col-md-10.col-md-offset-1.comment-content
+                    .col-md-12
+                        div(class="media media-block")
+                            div(class="media-left")
+                                a(href="#")
+                                    img(class="media-object media-img" src="/image/index_sea/lanmiao.jpg" alt="...")
+                                p 斯米兰群岛斯米兰群岛斯米兰群岛斯
+                            div(class="media-body")
+                                p 斯米兰群岛斯米兰群岛斯米兰群岛斯米兰群岛斯米兰群岛斯米兰群岛斯米兰群岛斯米兰群岛斯米兰群岛斯米兰群岛斯米兰群岛
+                                button(class="btn btn-default tranlation" type="submit") 翻译
+                    .col-md-12
+                        div(class="media media-block")
+                            div(class="media-left")
+                                a(href="#")
+                                    img(class="media-object media-img" src="/image/index_sea/lanmiao.jpg" alt="...")
+                                p 斯米兰群岛斯米兰群岛斯米兰群岛斯
+                            div(class="media-body")
+                                p 斯米兰群岛斯米兰群岛斯米兰群岛斯米兰群岛斯米兰群岛斯米兰群岛斯米兰群岛斯米兰群岛斯米兰群岛斯米兰群
+                                button(class="btn btn-default tranlation" type="submit") 翻译

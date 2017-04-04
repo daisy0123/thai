@@ -1,0 +1,18 @@
+nav(class="navbar navbar-default")
+    div(class="container-fluid")
+        div(class="navbar-header")
+            a(class="" href="/")
+                img(alt="泰好玩" src="/image/thai_logo.png" class="navbar_logo")
+        div(class="collapse navbar-collapse" id="bs-example-navbar-collapse-1")
+            ul(class="nav navbar-nav navbar-right nav-ul")
+                for item in nav.nav
+                    if point == item.key
+                        li
+                            a.active(href=item.href)
+                                i.fa(class=item.faImg aria-hidden="true") &nbsp;
+                                span=item.label
+                    else
+                        li
+                            a(href=item.href)
+                                i.fa(class=item.faImg aria-hidden="true") &nbsp;
+                                span=item.label
