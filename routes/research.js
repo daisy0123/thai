@@ -17,7 +17,7 @@ router.get('/scenic',function(req,res){
         nav: nav.create(req),
         key: 'scenic',
         point:'research',
-        title: "热门搜索"
+        title: "景点详情"
     };
     res.render('research/scenic', data);
 });

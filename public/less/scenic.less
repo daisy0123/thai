@@ -47,7 +47,6 @@ a {
     }
   }
 }
-
 .scroll-content {
   position: relative;
   .scenic-section {
@@ -58,41 +57,24 @@ a {
     background: #F4F4F4;
     padding: 25px 0;
     border-bottom: 1px solid #dedede;
-    .message-left{
+    height: 454px;
+    .message-right{
       padding:10px 10px;
       background: #FFFFFF;
-      height:350px;
-      width: 25%;
-      float: left;
+      width: 45%;
+      height: 402px;
+      float: right;
       border: 1px solid #dedede;
-      .message-left-top{
-        height:150px;
-        border-bottom: 1px solid #dedede;
-        .message-tag{
-          font-weight: bold;
-        }
-        .tag{
-          padding:10px 0px;
-          span{
-            font-weight: normal;
-            display: inline-block;
-            margin-right:10px;;
-            padding: 6px 6px;
-            background: @font-color;
-            color: #ffffff;
-            -webkit-border-radius:2px;
-            -moz-border-radius:2px;
-            border-radius:2px;
-          }
-        }
-      }
-      .message-left-bottom{
+      .message-star{
         padding:10px 0px;
         .message-score{
           font-weight: bold;
         }
         .score-show{
           margin-left: 70px;
+          .total{
+            font-size: 19px;
+          }
           span{
             font-weight: bold;
             font-size: 16px;
@@ -103,16 +85,12 @@ a {
           }
         }
       }
-      .message-left-right{
-        height:170px;
-      }
     }
-    .message-right{
-      height:350px;
-      width:72%;
-      float: right;
-      .scenic-slide{
-        height:350px;
+    .message-left{
+      width:52%;
+      float: left;
+      .mF_games_tb_wrap{
+        border: none;
       }
     }
   }
@@ -121,34 +99,86 @@ a {
     border-top: 1px solid #dedede;
     border-bottom: 1px solid #dedede;
     p{
+      padding: 10px 0px;
       text-indent:36px;
       font-size: 15px;
+      line-height: 20px;
       color: #666;
+    }
+  }
+  #scenic-analyse{
+    height:470px;
+    background: #F4F4F4;
+    border-top: 1px solid #dedede;
+    border-bottom: 1px solid #dedede;
+    .analyse-content{
+      padding: 0px 0px;
+      background: #FFFFFF;
+      height:400px;
+      box-shadow:2px 2px 2px #dedede,-2px -2px 2px #dedede;
+      .analyse-title{
+        height: 35px;
+        border-bottom: 1px solid #dedede;
+        .active{
+          background: @font-color;
+          color: #ffffff;
+        }
+        span{
+          display: inline-block;
+          height:35px;
+          text-align: center;
+          line-height: 35px;
+          cursor: pointer;
+          &:first-child{
+            border-right:1px solid #dedede;
+          }
+        }
+      }
+      .chart-show{
+        padding: 20px 20px;
+        height: 350px;
+        overflow: hidden;
+        .chart-page,.pie{
+          height: 350px;
+        }
+      }
     }
   }
   #scenic-comment{
     border-top: 1px solid #dedede;
     padding: 20px 0px;
     .selection{
-      padding-bottom: 10px;
+      position: relative;
+      height: 50px;
       border-bottom: 1px solid #dedede;
-      .span_active{
-        background: @font-color ;
-        color: #ffffff;
-      }
-      span{
+      li{
+        padding: 0px 30px;
+        height: 50px;
         display: inline-block;
-        border: 1px solid #dedede;
-        padding: 6px 15px;
-        background: #FFFFFF ;
+        line-height: 50px;
+        text-align: center;
+        font-size: 17px;
         color: @font-color;
-        -webkit-border-radius:2px;
-        -moz-border-radius:2px;
-        border-radius:2px;
         cursor: pointer;
-        &:hover,&active{
-          .span_active
-        }
+      }
+      .line-slide{
+        position: absolute;
+        bottom: -1px;
+        left: 1px;
+        width: 77px;
+        height: 2px;
+        background: @font-color;
+      }
+    }
+    .comment-tag{
+      padding-top:10px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid #dedede;
+      span{
+        padding: 5px 10px;
+        border: 1px solid #dedede;
+        display: inline-block;
+        margin-right: 10px;
       }
     }
     .comment-content{
@@ -163,6 +193,14 @@ a {
             height:100px;
             border-radius: 50%;
           }
+          p{
+            text-align: center;
+            margin-top: 5px;
+            margin-bottom: 0px;
+            i{
+              color: #f8f800;
+            }
+          }
         }
         .tranlation{
           position: absolute;
@@ -175,6 +213,21 @@ a {
         }
       }
     }
+    .page-show{
+      text-align: center;
+    }
   }
 }
-
+.backtotop{
+  width: 40px;
+  height:40px;
+  position: fixed;
+  bottom:50px;
+  right:20px;
+  background: @font-color;
+  color: #FFFFFF;
+  line-height: 46px;
+  text-align: center;
+  display: none;
+  cursor: pointer;
+}
