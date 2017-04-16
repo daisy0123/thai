@@ -4,6 +4,7 @@ var lessMiddleware = require('less-middleware');
 var routes = require('./routes/index');
 var research = require('./routes/research');
 var article = require('./routes/article');
+var user = require('./routes/user');
 
 var port=process.env.PORT||3000;
 var app=express();
@@ -24,3 +25,4 @@ app.use(express.static(path.join(__dirname, '/public')));
 app.use('/', routes);
 app.use('/research', research);
 app.use('/article', article);
+app.use("/user",user);

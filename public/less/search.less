@@ -1,0 +1,88 @@
+* {
+  margin: 0px;
+  padding: 0px;
+}
+
+@font-color: #104E8B;
+a {
+  text-decoration: none;
+  color: @font-color;
+  &:active, &:hover, &:visited {
+    text-decoration: none;
+  }
+}
+.search-title {
+  padding-bottom: 10px;
+  h3 {
+    color: @font-color;
+  }
+}
+.search-intro{
+  height: 402px;
+  margin-bottom: 20px;
+  .search-left{
+    width: 45%;
+    float: left;
+    .mF_games_tb_wrap{
+      border: 1px solid #dedede;
+    }
+  }
+  .search-right{
+    width: 50%;
+    float: right;
+    .search-mess{
+      height: 305px;
+      border-bottom: 1px solid #dedede;
+    }
+    .serch-button{
+      padding:20px 0px;
+      a{
+        background: @font-color;
+        color: #FFFFFF;
+        border: none;
+        -webkit-border-radius:0;
+        -moz-border-radius:0;
+        border-radius:0;
+      }
+    }
+  }
+}
+.search-command{
+  margin-top: 20px;
+  .command-name{
+    border-bottom: 1px solid #dedede;
+    padding-bottom: 10px;
+  }
+  .media-block{
+    box-shadow: 2px 2px 2px #eee,-2px -2px 2px #eee;
+    margin-bottom: 20px;
+    padding:8px 10px 8px 10px;
+    &:hover{
+      box-shadow: 2px 2px 2px #c8c8c8,-2px -2px 2px #c8c8c8;
+    }
+    .score-show{
+      padding-top: 10px;
+      p{
+        margin-bottom: 0px;
+        i{
+          color:#f8f800;
+          margin-right: 5px;
+        }
+      }
+    }
+    .media-time{
+      float: right;
+      font-size: 13px;
+      color:#9c9c9c;
+    }
+    .media-heading{
+      display: inline;
+    }
+    .media-img{
+      width: 200px;
+    }
+  }
+  .command-list{
+    padding-top: 20px;
+  }
+}

@@ -1,0 +1,24 @@
+extends ../public/layout
+
+block content
+    .container-fluid.login-page
+        .login-con
+            .login-title
+                span 用户登录
+            .login-mess
+                form
+                    .input-group
+                        span(class="input-group-addon" id="sizing-addon1")
+                            i(class="fa fa-user-circle" aria-hidden="true")
+                        input(type="text" class="form-control" placeholder="请输入用户名" aria-describedby="sizing-addon1")
+                    .input-group
+                        span(class="input-group-addon" id="sizing-addon2")
+                            i(class="fa fa-key" aria-hidden="true")
+                        input(type="password" class="form-control" placeholder="请输入登录密码" aria-describedby="sizing-addon2")
+                    .col-md-4.col-md-offset-4
+                        button(type="submit" class="btn btn-default sub-btn") 登录
+                .col-md-12.text-right
+                    a(href="/user/regiter" class="reg") 去注册>>
+
+
+

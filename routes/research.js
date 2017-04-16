@@ -21,5 +21,16 @@ router.get('/scenic',function(req,res){
     };
     res.render('research/scenic', data);
 });
+
+router.get('/search',function(req,res){
+    var data = {
+        nav: nav.create(req),
+        key: 'search',
+        point:'research',
+        title: "景点查询"
+    };
+    res.render('research/search', data);
+});
+
 module.exports = router;
 
