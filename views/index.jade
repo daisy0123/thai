@@ -36,39 +36,16 @@ block content
             div(class="commend-section col-md-12")
                 div(class="commend-title col-md-12")
                         h3
-                            a(href="#") 热门地点
-                .col-sm-6.col-md-3
-                    a(href="#")
-                        div(class="thumbnail commend-block")
-                            img(src="/image/index_sea/turtle.jpg" alt="...")
-                            h4 斯米兰群岛
-                            strong 错过等半年 | 在斯米兰群岛，邂逅大海龟！
-                            p(class="command-more") 目的地：
-                                span 斯米兰
-                .col-sm-6.col-md-3
-                    a(href="#")
-                        div(class="thumbnail commend-block")
-                            img(src="/image/index_sea/lanmiao.jpg" alt="...")
-                            h4 清迈蓝庙
-                            strong 除了黑白庙，泰国居然还有两座‘蓝庙’？！
-                            p(class="command-more") 目的地：
-                                span 清迈
-                .col-sm-6.col-md-3
-                    a(href="#")
-                        div(class="thumbnail commend-block")
-                            img(src="/image/index_sea/turtle.jpg" alt="...")
-                            h4 斯米兰群岛
-                            strong 错过等半年 | 在斯米兰群岛，邂逅大海龟！
-                            p(class="command-more") 目的地：
-                                span 斯米兰
-                .col-sm-6.col-md-3
-                    a(href="#")
-                        div(class="thumbnail commend-block")
-                            img(src="/image/index_sea/turtle.jpg" alt="...")
-                            h4 斯米兰群岛
-                            strong 错过等半年 | 在斯米兰群岛，邂逅大海龟！
-                            p(class="command-more") 目的地：
-                                span 斯米兰
+                            a(href="/research") 热门地点
+                -for(var i=0;i<4;i++)
+                    .col-sm-6.col-md-3
+                        a.commend-href(href="")
+                            div(class="thumbnail commend-block")
+                                img.commend-img(src="" alt="")
+                                h4.commend-text-title
+                                strong.commend-strong
+                                p(class="command-more") 目的地：
+                                    span
 
         .row
             div(class="acticle-section")

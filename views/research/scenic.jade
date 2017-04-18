@@ -49,33 +49,32 @@ block content
                                             img(src="/image/index_sea/sea1.jpg" thumb="" alt="" text="")
 
                     .message-right
-                        .col-md-12.message-intro
-                            h4 白金时尚购物中心
-                            p 白金时尚购物中心白金时尚购物中心白金时尚购物中心白金时尚购物中心白金时尚购物中心白金时尚购物中心白金时尚购物中心白金时尚购物中心白金时尚购物中心白金时尚购物中心白金时尚购物中心白金时尚购物中心
-                        .col-md-12.message-star
-                            .col-md-12.message-score 星级评价
-                            .col-md-4.col-md-offset-4
-                                p(class="score-show")
-                                    span(class="total") 总:&nbsp;
-                                        i(class="fa fa-star" aria-hidden="true")
-                                        i(class="fa fa-star" aria-hidden="true")
-                                        i(class="fa fa-star" aria-hidden="true")
-                                        i(class="fa fa-star" aria-hidden="true")
-                                p(class="score-show")
-                                    span 中:&nbsp;
-                                        i(class="fa fa-star" aria-hidden="true")
-                                        i(class="fa fa-star" aria-hidden="true")
-                                        i(class="fa fa-star" aria-hidden="true")
-                                        i(class="fa fa-star" aria-hidden="true")
-                                p(class="score-show")
-                                    span 美:&nbsp;
-                                        i(class="fa fa-star" aria-hidden="true")
-                                        i(class="fa fa-star" aria-hidden="true")
-                                        i(class="fa fa-star" aria-hidden="true")
-                                p(class="score-show")
-                                    span 泰:&nbsp;
-                                        i(class="fa fa-star" aria-hidden="true")
-                                        i(class="fa fa-star" aria-hidden="true")
+                        .col-md-7.message-intro
+                            h4 概览
+                            .col-md-12.ppadding
+                                p 白金时尚购物中心白金时尚购物中心白金时尚购物中心白金时尚购物中心白金时尚购物中心白金时尚购物中心白金时尚购物中心白金时尚购物中心白金时尚购物中心白金时尚购物中心白金时尚购物中心白金时尚购物中心
+                        .col-md-5.message-star
+                            h4 星级评价
+                            .col-md-10.col-md-offset-1.message-score
+                                .row.total-show
+                                    span.total 4.3
+                                    span.total-star
+                                        -for(var i=0;i<4;i++)
+                                            i(class="fa fa-star" aria-hidden="true")
+                                        span 1024人评价
+                                .row.fen-show
+                                    p 中 &nbsp;
+                                        -for(var i=0;i<4;i++)
+                                            i(class="fa fa-star" aria-hidden="true")
+                                        span 4.3
+                                    p 美 &nbsp;
+                                        -for(var i=0;i<3;i++)
+                                            i(class="fa fa-star" aria-hidden="true")
+                                        span 4.2
+                                    p 泰 &nbsp;
+                                        -for(var i=0;i<3;i++)
+                                            i(class="fa fa-star" aria-hidden="true")
+                                         span 4.2
 
 
             div.scenic-section.row(id="scenic-intro")
