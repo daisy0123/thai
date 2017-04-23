@@ -51,50 +51,18 @@ block content
             div(class="acticle-section")
                 div(class="acticle-title col-md-12")
                     h3
-                        a(href="#") 推荐游记
-                .col-md-12
-                    .col-md-6
-                        div(class="media media-block")
-                            div(class="media-left")
-                                a(href="#")
-                                    img(class="media-object media-img" src="/image/index_sea/lanmiao.jpg" alt="...")
-                            div(class="media-body")
-                                a(href="#")
-                                    h4(class="media-heading") 斯米兰群岛
-                                span(class="media-time") 目的地：
-                                    span 曼谷
-                                p 斯米兰群岛斯米兰群岛斯米兰群岛斯米兰群岛斯米兰群岛斯米兰群岛斯米兰群岛斯米兰群岛斯米兰群岛斯米兰群岛斯米兰群岛
-                    .col-md-6
-                        div(class="media media-block")
-                            div(class="media-left")
-                                a(href="#")
-                                    img(class="media-object media-img" src="/image/index_sea/lanmiao.jpg" alt="...")
-                            div(class="media-body")
-                                a(href="#")
-                                    h4(class="media-heading") 斯米兰群岛
-                                span(class="media-time") 目的地：
-                                    span 曼谷
-                                p 斯米兰群岛斯米兰群岛斯米兰群岛斯米兰群岛斯米兰群岛斯米兰群岛斯米兰群岛斯米兰群岛斯米兰群岛斯米兰群岛斯米兰群岛
-                .col-md-12
-                    .col-md-6
-                        div(class="media media-block")
-                            div(class="media-left")
-                                a(href="#")
-                                    img(class="media-object media-img" src="/image/index_sea/lanmiao.jpg" alt="...")
-                            div(class="media-body")
-                                a(href="#")
-                                    h4(class="media-heading") 斯米兰群岛
-                                span(class="media-time") 目的地：
-                                    span 曼谷
-                                p 斯米兰群岛斯米兰群岛斯米兰群岛斯米兰群岛斯米兰群岛斯米兰群岛斯米兰群岛斯米兰群岛斯米兰群岛斯米兰群岛斯米兰群岛
-                    .col-md-6
-                        div(class="media media-block")
-                            div(class="media-left")
-                                a(href="#")
-                                    img(class="media-object media-img" src="/image/index_sea/lanmiao.jpg" alt="...")
-                            div(class="media-body")
-                                a(href="#")
-                                    h4(class="media-heading") 斯米兰群岛
-                                span(class="media-time") 2017-04-04
-                                p 斯米兰群岛斯米兰群岛斯米兰群岛斯米兰群岛斯米兰群岛斯米兰群岛斯米兰群岛斯米兰群岛斯米兰群岛斯米兰群岛斯米兰群岛
-
+                        a(href="/article") 推荐游记
+                -for(var i=0;i<2;i++)
+                    .col-md-12
+                        -for(var j=0;j<2;j++)
+                            .col-md-6
+                                div(class="media media-block")
+                                    div(class="media-left")
+                                        a(href="/article/content")
+                                            img(class="media-object media-img" src="/image/index_sea/lanmiao.jpg" alt="...")
+                                    div(class="media-body")
+                                        a(href="/article/content")
+                                            h4(class="media-heading") 斯米兰群岛
+                                        span(class="media-time") 目的地：
+                                            span.media-name 曼谷
+                                        p.media-intro 斯米兰群岛斯米兰群岛斯米兰群岛斯米兰群岛斯米兰群岛斯米兰群岛斯米兰群岛斯米兰群岛斯米兰群岛斯米兰群岛斯米兰群岛

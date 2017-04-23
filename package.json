@@ -4,6 +4,7 @@
   "description": "",
   "main": "app.js",
   "dependencies": {
+    "body-parser": "~1.13.2",
     "express": "^4.15.2",
     "jade": "^1.11.0",
     "less-middleware": "^2.2.0",
