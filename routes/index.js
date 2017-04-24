@@ -1,6 +1,7 @@
 var express = require('express');
 var nav = require('./navbar');
 var router = express.Router();
+var api=require('./utils/api');
 
 router.get('/',function(req,res){
 
@@ -15,9 +16,14 @@ router.get('/',function(req,res){
 
 router.post('/searchword',function(req,res,next){
     var word = req.body.word;
-    res.send(word);
-    //var url="http://10.173.41.106:8080/search/search";
-    //res.send("get",url,"曼谷");
+    var path="/search/search";
+    //var url="http://192.168.203.94:8000/search/search?";
+    var data={
+        "search_word":word
+    };
+    api.send(path,"get",data).then(function (data) {
+        res.json(data);
+    });
 });
 
 module.exports = router;

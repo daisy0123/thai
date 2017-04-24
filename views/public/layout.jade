@@ -8,11 +8,13 @@ html
         link(href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet")
         link(rel='stylesheet' href='/style/navbar.css')
         link(rel='stylesheet' href='/style/'+key+'.css')
+        script(src="/javascript/lib/requirejs/require.js")
+        script(src="/javascript/config.js")
         script(src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js")
         script(src="//cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js")
         script(src="/javascript/lib/myfocus-2.0.1.min.js")
         script(src="http://api.map.baidu.com/api?type=quick&ak=Bz8e6aiKD1d6xCdhRER5eY4W8B83vS1e&v=1.0")
-        script(src="/javascript/"+key+".js")
+        script(src="/javascript/page/"+key+".js")
     body
         include navbar
         block content
