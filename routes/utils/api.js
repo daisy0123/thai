@@ -5,7 +5,7 @@ var Q = require('q');
 var request = require('request');
 
 var api={
-    "send" : function send(path,method, data){
+    "send" : function send(path,method){
         var deferred = Q.defer();
 
 
