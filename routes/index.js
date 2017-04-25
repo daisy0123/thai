@@ -16,12 +16,12 @@ router.get('/',function(req,res){
 
 router.post('/searchword',function(req,res,next){
     var word = req.body.word;
-    var path="/search/search？search_word"+word;
-    //var url="http://192.168.203.94:8000/search/search?";
+    //var path="/search/search？search_word"+word;
+    var url="http://192.168.203.94:8000/search/search?search_word="+word;
     // var data={
     //     "search_word":word
     // };
-    api.send(path,"get").then(function (data) {
+    api.send(url).then(function (data) {
         res.json(data);
     });
 });
