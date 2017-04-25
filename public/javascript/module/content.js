@@ -2,31 +2,34 @@ define(function (require,exports,module) {
     var $=require('jquery');
 
     var event={
-        "eventchange": function () {
-            $(".show-btn").click(function () {
-                $(".content-list").animate({
-                    margin:"-550px 0px"
-                },1000, function () {
-                    $(".back-btn").animate({
-                        "margin": "-45px 0 0 0"
-                    },500);
-                    $(".con-title").animate({
-                        "opacity":"1"
-                    },500);
-                });
+        //下拉显示游记
+        "content_show": function () {
+            $(".content-list").animate({
+                margin:"-550px 0px"
+            },1000, function () {
+                $(".back-btn").animate({
+                    "margin": "-45px 0 0 0"
+                },500);
+                $(".con-title").animate({
+                    "opacity":"1"
+                },500);
             });
-            $(".back-btn").click(function () {
-                $(".content-list").animate({
-                    margin:"0"
-                },1000, function () {
-                    $(".back-btn").animate({
-                        "margin": "0"
-                    },200);
-                    $(".con-title").animate({
-                        "opacity":"0"
-                    },200);
-                });
+        },
+        //回到游记首页
+        "backTo": function () {
+            $(".content-list").animate({
+                margin:"0"
+            },1000, function () {
+                $(".back-btn").animate({
+                    "margin": "0"
+                },200);
+                $(".con-title").animate({
+                    "opacity":"0"
+                },200);
             });
+        },
+        //左右按钮滑动
+        "leftRightChange": function () {
             var count=$(".con-content>ul").children("li").length+1;
             var allwidth=count * $(".con-content>ul").children("li").width()+1;
             $(".con-content>ul").width(allwidth);
@@ -76,7 +79,13 @@ define(function (require,exports,module) {
     };
     module.exports={
         'main': function () {
-            event.eventchange();
+            event.leftRightChange();
+            //事件效果
+            this.init();
+        },
+        'init': function () {
+            $(".show-btn").click(event.content_show);
+            $(".back-btn").click(event.backTo);
         }
     }
 });
