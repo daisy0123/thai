@@ -17,10 +17,10 @@ requirejs.config({
 
 
         // 模块
-        'content':'module/content',
+        'content': 'module/content',
         'index' : 'module/index',
         'scenic' : 'module/scenic',
-
+        'search': 'module/search'
 
     },
 

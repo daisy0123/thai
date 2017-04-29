@@ -49,10 +49,11 @@ define(function (require, exports, module) {
         },
         'searchdata': function (word) {
             var url="/searchword";
-            var data={"word":word};
-            api.send(url,"post",data).then(function (data) {
-                console.log(data);
-                alert(data);
+            var data={word:word};
+            api.send(url,"post",data).then(function (result) {
+                var mess=json(result);
+                console.log(mess.scene_name);
+                console.log(result);
             });
         }
     };
@@ -66,10 +67,10 @@ define(function (require, exports, module) {
             this.init();
         },
         'init': function () {
-           // $(".span-search").click(function () {
-                //var searchWord=$(".index-search-text").val();
-                event.searchdata("曼谷");
-           // });
+            $(".span-search").click(function () {
+                var searchWord=$(".index-search-text").val();
+                event.searchdata(searchWord);
+            });
         }
     };
 

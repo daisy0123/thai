@@ -4,7 +4,6 @@ var router = express.Router();
 var api=require('./utils/api');
 
 router.get('/',function(req,res){
-
     var data = {
         nav: nav.create(req),
         key: 'index',
@@ -16,17 +15,17 @@ router.get('/',function(req,res){
 
 router.post('/searchword',function(req,res,next){
     var word = req.body.word;
-    //var path="/search/search/?search_word="+word;
-    //res.json(word);
-    var url="http://10.173.41.207:8000/search/search/?search_word="+word;
-    api.get(url).then(function (data) {
-        console.log(data);
-        //res.json(data);
+    var path='/search/search/?';
+    var data={
+        'search_word':word
+    };
+    api.get(data,path).then(function (data) {
+        res.json(data);
     });
 });
 router.post('/indexdata', function (req,res,next) {
     var pageName=req.body.pageName;
-    api.post(pageName,"post").then(function (data) {
+    api.post(pageName).then(function (data) {
         res.json(data);
     });
 });
