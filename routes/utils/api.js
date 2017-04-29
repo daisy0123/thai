@@ -6,11 +6,12 @@ var http=require('http');
 var querystring = require('querystring');
 
 //全局变量
-var hostname="10.173.40.121";
-var port="8000";
-var api = {
-    "get": function send(data,path) {
-       var deferred = Q.defer();
+        var hostname="10.173.40.90";
+        var port="8080";
+        var api = {
+            "get": function send(data,path) {
+                var deferred = Q.defer();
+                console.log(data);
         //发送Get请求
         var data=data;
         var content=querystring.stringify(data);
@@ -19,11 +20,12 @@ var api = {
             port:port,
             path:path + content,
             method:'GET'
-        }
+        };
+        console.log(options);
         //创建请求
         var req=http.request(options,function(res){
             console.log('STATUS:'+res.statusCode);
-            //console.log('HEADERS:'+JSON.stringify(res.headers));
+            console.log('HEADERS:'+JSON.stringify(res.headers));
             res.setEncoding('utf-8');
             res.on('data',function(body){
                 deferred.resolve(body);
@@ -34,8 +36,10 @@ var api = {
         });
         req.on('error',function(err){
             deferred.reject(err);
+            console.log(err.message);
         });
         req.end();
+
         return deferred.promise;
     },
     "post": function (pageName) {

@@ -50,10 +50,13 @@ define(function (require, exports, module) {
         'searchdata': function (word) {
             var url="/searchword";
             var data={word:word};
-            api.send(url,"post",data).then(function (result) {
-                var mess=json(result);
-                console.log(mess.scene_name);
-                console.log(result);
+            api.send(url,"post",data).then(function (result){
+                if(result=="404 NOT FOUND!!"){
+                    alert("没有该景点");
+                }else{
+                    var scene=JSON.parse(result);
+                    location.href="../research/search/"+scene.scene_name;
+                }
             });
         }
     };
@@ -69,6 +72,8 @@ define(function (require, exports, module) {
         'init': function () {
             $(".span-search").click(function () {
                 var searchWord=$(".index-search-text").val();
+                $(".index-search-text").val(null);
+                console.log(searchWord);
                 event.searchdata(searchWord);
             });
         }

@@ -12,6 +12,7 @@ define(function (require, exports, module) {
                 url: url,
                 type: type,
                 data: data,
+                dataType:"json",
                 success: function (data) {
                     deferred.resolve(data);
                 },

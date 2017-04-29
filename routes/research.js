@@ -1,6 +1,8 @@
 var express = require('express');
 var nav = require('./navbar');
 var router = express.Router();
+var url = require('url');
+var api=require('./utils/api');
 
 router.get('/',function(req,res){
     var data = {
@@ -22,13 +24,20 @@ router.get('/scenic',function(req,res){
     res.render('research/scenic', data);
 });
 
-router.get('/search',function(req,res){
+router.get('/search/:scene_name',function(req,res){
+    var params = url.parse(req.url, true).query;
+    var scene_name=req.params.scene_name;
+    var path='/search/search/?';
+    var search_word={'search_word':scene_name};
     var data = {
         nav: nav.create(req),
         key: 'search',
         point:'research',
-        title: "景点查询"
+        title: "景点查询",
     };
+    api.get(search_word,path).then(function (data) {
+        console.log(data);
+    });
     res.render('research/search', data);
 });
 

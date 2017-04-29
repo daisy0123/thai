@@ -16,9 +16,7 @@ router.get('/',function(req,res){
 router.post('/searchword',function(req,res,next){
     var word = req.body.word;
     var path='/search/search/?';
-    var data={
-        'search_word':word
-    };
+    var data={'search_word':word};
     api.get(data,path).then(function (data) {
         res.json(data);
     });
