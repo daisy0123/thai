@@ -12,83 +12,46 @@ block content
                         i(class="fa fa-search" aria-hidden="true")
         .row.content-section
             .col-md-10.col-md-offset-1
-                .col-sm-6.col-md-3
-                    a(href="/research/scenic")
-                        div(class="thumbnail commend-block")
-                            img(src="/image/index_sea/turtle.jpg" alt="...")
-                            h5 斯米兰群岛
-                            p 屋顶上的梦想家
-                            p 2014-01-07[7天]
-                .col-sm-6.col-md-3
-                    a(href="#")
-                        div(class="thumbnail commend-block")
-                            img(src="/image/index_sea/lanmiao.jpg" alt="...")
-                            h5 斯米兰群岛
-                            p 屋顶上的梦想家
-                            p 2014-01-07[7天]
-                .col-sm-6.col-md-3
-                    a(href="#")
-                        div(class="thumbnail commend-block")
-                            img(src="/image/index_sea/lanmiao.jpg" alt="...")
-                            h5 斯米兰群岛
-                            p 屋顶上的梦想家
-                            p 2014-01-07[7天]
-                .col-sm-6.col-md-3
-                    a(href="#")
-                        div(class="thumbnail commend-block")
-                            img(src="/image/index_sea/lanmiao.jpg" alt="...")
-                            h5 斯米兰群岛
-                            p 屋顶上的梦想家
-                            p 2014-01-07[7天]
+                -for(var i=0;i<hotsearch.length;i++)
+                    .col-sm-6.col-md-3
+                        a(href="/research/scenic/"+hotsearch[i].scene_name)
+                            div(class="thumbnail commend-block")
+                                img(src=hotsearch[i].piciture alt=hotsearch[i].scene_name)
+                                h5=hotsearch[i].scene_name
+                                .score-show
+                                    p
+                                        span 中:&nbsp;
+                                            -for(var j=0;j<hotsearch[i].chi_score;j++)
+                                                i(class="fa fa-star" aria-hidden="true")
+                                .score-show
+                                    p
+                                        span 美:&nbsp;
+                                            -for(var j=0;j<hotsearch[i].eng_score;j++)
+                                                i(class="fa fa-star" aria-hidden="true")
+                                .score-show
+                                    p
+                                        span 泰:&nbsp;
+                                            -for(var j=0;j<hotsearch[i].thai_score;j++)
+                                                i(class="fa fa-star" aria-hidden="true")
 
-            .col-md-10.col-md-offset-1
-                .col-sm-6.col-md-3
-                    a(href="#")
-                        div(class="thumbnail commend-block")
-                            img(src="/image/index_sea/turtle.jpg" alt="...")
-                            h5 斯米兰群岛
-                            p 屋顶上的梦想家
-                            p 2014-01-07[7天]
-                .col-sm-6.col-md-3
-                    a(href="#")
-                        div(class="thumbnail commend-block")
-                            img(src="/image/index_sea/lanmiao.jpg" alt="...")
-                            h5 斯米兰群岛
-                            p 屋顶上的梦想家
-                            p 2014-01-07[7天]
-                .col-sm-6.col-md-3
-                    a(href="#")
-                        div(class="thumbnail commend-block")
-                            img(src="/image/index_sea/lanmiao.jpg" alt="...")
-                            h5 斯米兰群岛
-                            p 屋顶上的梦想家
-                            p 2014-01-07[7天]
-                .col-sm-6.col-md-3
-                    a(href="#")
-                        div(class="thumbnail commend-block")
-                            img(src="/image/index_sea/lanmiao.jpg" alt="...")
-                            h5 斯米兰群岛
-                            p 屋顶上的梦想家
-                            p 2014-01-07[7天]
 
             .col-md-10.col-md-offset-1.page-show
                 nav(aria-label="Page navigation")
                     ul(class="pagination")
-                        li
-                            a(href="#" aria-label="Previous")
-                                span(aria-hidden="true") &laquo;
-                        li
-                            a(href="#") 1
-                        li
-                            a(href="#") 2
-                        li
-                            a(href="#") ...
-                        li
-                            a(href="#") 4
-                        li
-                            a(href="#") 5
-                        li
-                            a(href="#" aria-label="Next")
-                                span(aria-hidden="true") &raquo;
+                        if page>1
+                            li
+                                a(href="/research/"+(Number(page)-1) aria-label="Previous")
+                                    span(aria-hidden="true") &laquo;
+                        -for(var i=1;i<=3;i++)
+                            if i==page
+                                li
+                                    a.active_page(href="/research/"+i)=i
+                            else
+                                li
+                                    a(href="/research/"+i)=i
+                        if page<3
+                            li
+                                a(href="/research/"+(Number(page)+1) aria-label="Next")
+                                    span(aria-hidden="true") &raquo;
 
 

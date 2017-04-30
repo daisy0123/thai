@@ -1,5 +1,6 @@
 define(function (require,exports,module) {
     var $=require('jquery');
+    var myfocus=require('myfocus');
 
     var event={
         //顶部导航滚动监听

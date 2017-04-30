@@ -4,7 +4,7 @@ block content
     .container-fuild
         .row
             .col-md-10.col-md-offset-1.search-title
-                h3=scene_name
+                h3=scene.scene_name
         .row.search-content
             .col-md-10.col-md-offset-1.search-intro
                 .search-left
@@ -32,76 +32,35 @@ block content
                 .search-right
                     .search-mess
                         h5 景点介绍
-                        p 曼谷是泰国的首都和最大的城市，位于泰国的中部，从曼谷出发，到南部的普吉岛和北部的清迈所用的时间几乎一样。曼谷也是世界上拥有佛寺最多的城，所以也被誉为“佛教之都”。
-                            | 曼谷是一座具有强大包容性的城市，也永远不会让人觉得无趣，各种强烈的反差也是吸引成千上万的游客到此来探索的原因。在曼谷，游客可以目睹泰国历史文化的精萃，感受城市的古老，也可以在集现代时尚与繁华热闹一体的购物中心忘情血拼；可以在无处不在的路边摊尝尽地道美味，也可以尽情享受五星级的高端奢华服务；可以在寺庙中禅修拜佛，寻求心灵的净化，也可以纵情于纸醉金迷的夜生活。
-                            | 曼谷的周边也是旅游热门区域，原始古朴的水上市场、全球“最危险之一的”铁道市场、历史古城大城、皇室后花园华欣以及人妖之都芭提雅都让游客们趋之若鹜，一探其神秘和美丽。
+                        p=scene.introduction
                     .serch-button
                         a(class="btn btn-default" href="/research/" role="button") 共有
-                            span 8
+                            span=scene.scene_num
                             | 个景点
 
             .col-md-10.col-md-offset-1.search-command
                 h4.command-name 推荐景点
                 .command-list
-                    -for(var i=0;i<3;i++)
-                        .col-md-12
-                            .col-md-6
-                                div(class="media media-block")
-                                    div(class="media-left")
-                                        a(href="#")
-                                            img(class="media-object media-img" src="/image/index_sea/lanmiao.jpg" alt="...")
-                                    div(class="media-body")
-                                        a(href="#")
-                                            h4(class="media-heading") 斯米兰群岛
-                                            .score-show
-                                                p
-                                                    span(class="total") 总:&nbsp;
+                    -for(var i=0;i<scene.recommend_scene.length;i++)
+                        .col-md-6
+                            div(class="media media-block")
+                                div(class="media-left")
+                                    a(href="/research/scenic/"+scene.recommend_scene[i].scene_name)
+                                        img(class="media-object media-img" src=scene.recommend_scene[i].picture alt=scene.recommend_scene[i].scene_name)
+                                div(class="media-body")
+                                    a(href="/research/scenic/"+scene.recommend_scene[i].scene_name)
+                                        h4(class="media-heading")=scene.recommend_scene[i].scene_name
+                                        .score-show
+                                            p
+                                                span 中:&nbsp;
+                                                    -for(var j=0;j<scene.recommend_scene[i].score[0];j++)
                                                         i(class="fa fa-star" aria-hidden="true")
+                                            p
+                                                span 美:&nbsp;
+                                                    -for(var j=0;j<scene.recommend_scene[i].score[2];j++)
                                                         i(class="fa fa-star" aria-hidden="true")
+                                            p
+                                                span 泰:&nbsp;
+                                                    -for(var j=0;j<scene.recommend_scene[i].score[4];j++)
                                                         i(class="fa fa-star" aria-hidden="true")
-                                                        i(class="fa fa-star" aria-hidden="true")
-                                                p
-                                                    span 中:&nbsp;
-                                                        i(class="fa fa-star" aria-hidden="true")
-                                                        i(class="fa fa-star" aria-hidden="true")
-                                                        i(class="fa fa-star" aria-hidden="true")
-                                                        i(class="fa fa-star" aria-hidden="true")
-                                                p
-                                                    span 美:&nbsp;
-                                                        i(class="fa fa-star" aria-hidden="true")
-                                                        i(class="fa fa-star" aria-hidden="true")
-                                                        i(class="fa fa-star" aria-hidden="true")
-                                                p
-                                                    span 泰:&nbsp;
-                                                        i(class="fa fa-star" aria-hidden="true")
-                                                        i(class="fa fa-star" aria-hidden="true")
-                             .col-md-6
-                                div(class="media media-block")
-                                    div(class="media-left")
-                                        a(href="#")
-                                            img(class="media-object media-img" src="/image/index_sea/lanmiao.jpg" alt="...")
-                                    div(class="media-body")
-                                        a(href="#")
-                                            h4(class="media-heading") 斯米兰群岛
-                                            .score-show
-                                                p
-                                                    span(class="total") 总:&nbsp;
-                                                        i(class="fa fa-star" aria-hidden="true")
-                                                        i(class="fa fa-star" aria-hidden="true")
-                                                        i(class="fa fa-star" aria-hidden="true")
-                                                        i(class="fa fa-star" aria-hidden="true")
-                                                p
-                                                    span 中:&nbsp;
-                                                        i(class="fa fa-star" aria-hidden="true")
-                                                        i(class="fa fa-star" aria-hidden="true")
-                                                        i(class="fa fa-star" aria-hidden="true")
-                                                        i(class="fa fa-star" aria-hidden="true")
-                                                p
-                                                    span 美:&nbsp;
-                                                        i(class="fa fa-star" aria-hidden="true")
-                                                        i(class="fa fa-star" aria-hidden="true")
-                                                        i(class="fa fa-star" aria-hidden="true")
-                                                p
-                                                    span 泰:&nbsp;
-                                                        i(class="fa fa-star" aria-hidden="true")
-                                                        i(class="fa fa-star" aria-hidden="true")
+

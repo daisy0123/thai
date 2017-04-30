@@ -1,5 +1,7 @@
 define(function (require,exports,module) {
     var $ = require('jquery');
+    var myfocus=require('myfocus');
+
     var event={
         'myFocus': function () {
             myFocus.set({
