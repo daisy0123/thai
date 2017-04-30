@@ -63,16 +63,15 @@ block content
                     h3
                         a(href="/article") 推荐游记
                 -for(var j=0;j<indexdata.recommend_travel_notes.length;j++)
-                .col-md-6
-                    div(class="media media-block")
-                        div(class="media-left")
-                            a(href="/article/content/" + indexdata.recommend_travel_notes[j].id)
-                                img(class="media-object media-img" src=indexdata.recommend_travel_notes[j].picture alt="...")
-                        div(class="media-body")
-                            a(href="/article/content/" + indexdata.recommend_travel_notes[j].id)
-                                h4(class="media-heading")=indexdata.recommend_travel_notes[j].title
-                            span(class="media-time")=indexdata.recommend_travel_notes[j].author
-                                | &emsp;
-                                span.media-name=indexdata.recommend_travel_notes[j].time
-                            p.media-intro 斯米兰群岛斯米兰群岛斯米兰群岛斯米兰群岛斯米兰群岛斯米兰群岛斯米兰群岛斯米兰群岛斯米兰群岛斯米兰群岛斯米兰群岛
-
+                    .col-md-6
+                        div(class="media media-block")
+                            div(class="media-left")
+                                a(href="/article/content/" + indexdata.recommend_travel_notes[j].id)
+                                    img(class="media-object media-img" src=indexdata.recommend_travel_notes[j].picture alt="...")
+                            div(class="media-body")
+                                a(href="/article/content/" + indexdata.recommend_travel_notes[j].id)
+                                    h4(class="media-heading")=indexdata.recommend_travel_notes[j].title
+                                span(class="media-time")=indexdata.recommend_travel_notes[j].author
+                                    | &emsp;
+                                    span.media-name=indexdata.recommend_travel_notes[j].time
+                                p.media-intro=indexdata.recommend_travel_notes[j].description

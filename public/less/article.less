@@ -32,9 +32,16 @@ a {
 .article-section {
   margin-top: 40px;
   .article-list {
-    padding: 10px;
+    margin-right:6.6%;
+    margin-bottom:30px;
+    margin-top:20px;
+    width: 20%;
+    float:left;
+    &:nth-child(4n){
+      margin-right:0;
+    }
     .article-con {
-      height: 400px;
+      height: auto;
       overflow: hidden;
       -webkit-border-radius: 5px;
       -moz-border-radius: 5px;
@@ -83,7 +90,7 @@ a {
       opacity: 1;
     }
     .project:hover .project__detail {
-      border-width: 10px;
+      border-width: 8px;
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
     }
     .project:hover .project__title,
@@ -95,10 +102,10 @@ a {
     }
     .project__detail {
       position: absolute;
-      left: 30px;
-      right: 30px;
-      top: 30px;
-      bottom: 30px;
+      left: 25px;
+      right: 25px;
+      top: 25px;
+      bottom: 25px;
       display: -webkit-flex;
       display: -ms-flexbox;
       display: flex;
@@ -110,41 +117,46 @@ a {
       justify-content: center;
       text-align: center;
       pointer-events: none;
-      -webkit-transform: translateZ(30px);
-      transform: translateZ(30px);
-      border: 0 solid #00BCD4;
+      -webkit-transform: translateZ(20px);
+      transform: translateZ(20px);
+      border: 0 solid @font-color;
       transition: border .4s ease;
     }
     .project__title {
       margin: 0 0 10px;
-      font-size: 20px;
+      font-size: 17px;
       font-weight: bold;
       transition: .4s ease;
       opacity: 0;
-      -webkit-transform: translateY(40px) scale(0);
-      -ms-transform: translateY(40px) scale(0);
-      transform: translateY(40px) scale(0);
+      -webkit-transform: translateY(20px) scale(0);
+      -ms-transform: translateY(20px) scale(0);
+      transform: translateY(20px) scale(0);
       will-change: transform;
     }
     .project__title a {
       color: white;
+      display: block;
     }
     .project__category {
       opacity: 0;
       transition: .4s ease;
       transition-delay: .1s;
-      -webkit-transform: translateY(40px) scale(0);
-      -ms-transform: translateY(40px) scale(0);
-      transform: translateY(40px) scale(0);
+      -webkit-transform: translateY(20px) scale(0);
+      -ms-transform: translateY(20px) scale(0);
+      transform: translateY(20px) scale(0);
       will-change: transform;
     }
     .project__category a {
-      color: rgba(255, 255, 255, 0.8);
+      color: rgba(255, 255, 255, 0.5);
       font-size: 1.3em;
     }
 
   }
   .page-show {
     text-align: center;
+    .active_page{
+      background: @font-color;
+      color: #ffffff;
+    }
   }
 }
