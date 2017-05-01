@@ -38,7 +38,7 @@ block content
                         a(href="/research") 热门地点
                 -for(var i=0;i<indexdata.hot_location.length;i++)
                     .col-sm-6.col-md-3
-                        a.commend-href(href="")
+                        a.commend-href(href="/research/scenic/"+indexdata.hot_location[i].scene_name)
                             div(class="thumbnail commend-block")
                                 img.commend-img(src=indexdata.hot_location[i].piciture alt=indexdata.hot_location.scene_name)
                                 h4.commend-text-title=indexdata.hot_location[i].scene_name

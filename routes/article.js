@@ -26,25 +26,19 @@ router.get('/:page',function(req,res){
 router.get('/content/:id',function(req,res){
     var params = url.parse(req.url, true).query;
     var id=req.params.id;
-    //var path='/search/search/?';
+    var path='/discover/get_travel_note/?';
     var search_word={'id': id};
-    //api.get(search_word,path).then(function (data) {
-    //    var scenic = {
-    //        nav: nav.create(req),
-    //        key: 'scenic',
-    //        point:'research',
-    //        title: "景点详情",
-    //        scenic:data
-    //    };
-    //    res.render('research/scenic', scenic);
-    //});
-    var data = {
-        nav: nav.create(req),
-        key: 'content',
-        point:'article',
-        title: "游记内容"
-    };
-    res.render('article/content', data);
+    api.get(search_word,path).then(function (data) {
+        var content = {
+            nav: nav.create(req),
+            key: 'content',
+            point:'article',
+            title: "游记内容",
+            condata:data
+        };
+        console.log(data);
+        res.render('article/content', content);
+    });
 });
 
 module.exports = router;

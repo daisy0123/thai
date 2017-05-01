@@ -13,7 +13,6 @@ router.get('/',function(req,res){
             title: "泰好玩首页",
             indexdata:data
         };
-        console.log(data);
         res.render('index', index);
     });
 });
