@@ -6,7 +6,7 @@ var http = require('http');
 var querystring = require('querystring');
 
 //全局变量
-var hostname = "10.173.40.12";
+var hostname = "10.173.43.23";
 var port = "8000";
 var api = {
     "get": function send(data, path) {

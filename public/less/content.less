@@ -8,7 +8,7 @@ a{
 }
 .content-section{
   height: 600px;
-  background: url(../image/content/zhangjiajie.jpg) no-repeat;
+  background-repeat: no-repeat;
   background-size:cover ;
   position: relative;
   overflow: hidden;
@@ -58,36 +58,41 @@ a{
       float: left;
       cursor: pointer;
     }
-    .con-title{
-      padding-bottom: 0px;
-      margin-top: -25px;
-      height: 30px;
-      opacity: 0;
-      span{
-        display: block;
-        width:70px ;
-        height: 30px;
-        line-height: 30px;
-        background: #fff;
-        font-size: 18px;
-        margin:0 auto;
-        text-align: center;
-      }
-    }
+    //.con-title{
+    //  padding-bottom: 0px;
+    //  margin-top: -25px;
+    //  height: 30px;
+    //  opacity: 0;
+    //  span{
+    //    display: block;
+    //    width:70px ;
+    //    height: 30px;
+    //    line-height: 30px;
+    //    background: #fff;
+    //    font-size: 18px;
+    //    margin:0 auto;
+    //    text-align: center;
+    //  }
+    //}
     .con-content{
       height: 500px;
       position: absolute;
       top:0px;
       left:-50px;
       ul{
-        width: 200%;
+        width: auto;
         height:500px;
         list-style: none;
         li{
-          width: 300px;
+          padding: 20px 10px;
           height: 500px;
+          width:400px;
           float: left;
           border-right:1px solid #dedede;
+          img{
+            max-height:100%;
+            width: 100%;
+          }
         }
       }
     }

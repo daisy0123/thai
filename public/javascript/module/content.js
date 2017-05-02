@@ -8,11 +8,11 @@ define(function (require,exports,module) {
                 margin:"-550px 0px"
             },1000, function () {
                 $(".back-btn").animate({
-                    "margin": "-45px 0 0 0"
+                    "margin": "-40px 0 0 0"
                 },500);
-                $(".con-title").animate({
-                    "opacity":"1"
-                },500);
+                //$(".con-title").animate({
+                //    "opacity":"1"
+                //},500);
             });
         },
         //回到游记首页
@@ -23,9 +23,9 @@ define(function (require,exports,module) {
                 $(".back-btn").animate({
                     "margin": "0"
                 },200);
-                $(".con-title").animate({
-                    "opacity":"0"
-                },200);
+                //$(".con-title").animate({
+                //    "opacity":"0"
+                //},200);
             });
         },
         //左右按钮滑动
@@ -75,6 +75,12 @@ define(function (require,exports,module) {
                     }
                 }
             });
+        },
+        "ul_width":function(){
+            var ul=$(".list-con");
+            var li_num=ul.children("li").length;
+            var ul_width=(li_num*400)+1;
+            ul.width(ul_width);
         }
     };
     module.exports={
@@ -82,6 +88,7 @@ define(function (require,exports,module) {
             event.leftRightChange();
             //事件效果
             this.init();
+            event.ul_width();
         },
         'init': function () {
             $(".show-btn").click(event.content_show);

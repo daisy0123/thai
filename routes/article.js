@@ -18,7 +18,6 @@ router.get('/:page',function(req,res){
             articledata:data,
             page: page
         };
-        console.log(data);
         res.render('article/article', article);
     });
 });

@@ -3,15 +3,15 @@ extends ../public/layout
 block content
     link(href="https://cdn.bootcss.com/animate.css/3.5.2/animate.min.css" rel="stylesheet")
 
-    .container-fuild.content-section
+    .container-fuild.content-section(style="background-image:url("+condata.picture+")")
         .col-md-12.content-title-text
             .content-text
-                h2.animated.rollIn 魔幻张家界
-                time 2016年4月5日 [4天]
-                p.user By huchichi
+                h2.animated.rollIn=condata.title
+                time=condata.time
+                p.user="by "+condata.author
                 i(class="fa fa-arrow-circle-o-down fa-3x show-btn" aria-hidden="true")
         .col-md-12.content-list
-            .row.con-title
+            //.row.con-title
                 span 第一天
             span.back-btn
                 i(class="fa fa-arrow-circle-up fa-2x" aria-hidden="true")
@@ -20,9 +20,23 @@ block content
             span.next-btn
                 i(class="fa fa-arrow-circle-right fa-2x" aria-hidden="true")
             .col-md-12.con-content
-                ul
-                    -for(var i=0;i<10;i++)
-                        li=i+"hhh"
+                ul.list-con
+                    -for(var i=0;i<condata.content.length;i++)
+                        if(condata.content[i].node=="day")
+                            li
+                                p=condata.content[i].day_date
+                                p=condata.content[i].day_index
+                        else if(condata.content[i].node=="text")
+                            li
+                                p=condata.content[i].text_content
+                        else if(condata.content[i].node=="node")
+                            li
+                                p=condata.content[i].node_name
+                                p=condata.content[i].score
+                        else if(condata.content[i].node == "photo")
+                            li
+                                img(src=condata.content[i].src)
+
 
 
 
