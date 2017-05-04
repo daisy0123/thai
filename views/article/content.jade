@@ -11,8 +11,6 @@ block content
                 p.user="by "+condata.author
                 i(class="fa fa-arrow-circle-o-down fa-3x show-btn" aria-hidden="true")
         .col-md-12.content-list
-            //.row.con-title
-                span 第一天
             span.back-btn
                 i(class="fa fa-arrow-circle-up fa-2x" aria-hidden="true")
             span.prev-btn
@@ -23,19 +21,28 @@ block content
                 ul.list-con
                     -for(var i=0;i<condata.content.length;i++)
                         if(condata.content[i].node=="day")
-                            li
-                                p=condata.content[i].day_date
-                                p=condata.content[i].day_index
+                            li.day
+                                .day_text
+                                    h4=condata.content[i].day_date
+                                    p=condata.content[i].day_index
                         else if(condata.content[i].node=="text")
-                            li
+                            li.text
                                 p=condata.content[i].text_content
                         else if(condata.content[i].node=="node")
-                            li
-                                p=condata.content[i].node_name
-                                p=condata.content[i].score
+                            li.node
+                                h4=condata.content[i].node_name
+                                p.node-eng=condata.content[i].node_name_en
+                                p.node-eng=condata.content[i].memo
+                                if(condata.content[i].score)
+                                    p="我的评价："
+                                        -for(var j=0;j<condata.content[i].score;j++)
+                                                i(class="fa fa-star" aria-hidden="true")
+                                p.desc=condata.content[i].desc
                         else if(condata.content[i].node == "photo")
                             li
+                                p=condata.content[i].caption
                                 img(src=condata.content[i].src)
+
 
 
 

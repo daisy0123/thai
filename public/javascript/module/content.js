@@ -10,9 +10,6 @@ define(function (require,exports,module) {
                 $(".back-btn").animate({
                     "margin": "-40px 0 0 0"
                 },500);
-                //$(".con-title").animate({
-                //    "opacity":"1"
-                //},500);
             });
         },
         //回到游记首页
@@ -23,9 +20,6 @@ define(function (require,exports,module) {
                 $(".back-btn").animate({
                     "margin": "0"
                 },200);
-                //$(".con-title").animate({
-                //    "opacity":"0"
-                //},200);
             });
         },
         //左右按钮滑动

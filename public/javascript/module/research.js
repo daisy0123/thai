@@ -7,7 +7,6 @@ define(function (require,exports,module) {
             var url="../searchword";
             var data={word:word};
             api.send(url,"post",data).then(function (result){
-                console.log(result);
                 if(result=="404 NOT FOUND!!"){
                     alert("没有该景点");
                 }else if(result.id){

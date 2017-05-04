@@ -35,10 +35,17 @@ router.get('/content/:id',function(req,res){
             title: "游记内容",
             condata:data
         };
-        console.log(data);
         res.render('article/content', content);
     });
 });
-
+router.post('/search/', function (req,res) {
+    var search=req.body.word;
+    var path='/discover/search_notes/?';
+    var search_word={'search_word':search};
+    api.get(search_word,path).then(function (data) {
+       res.json(data);
+        console.log(data);
+    });
+});
 module.exports = router;
 
