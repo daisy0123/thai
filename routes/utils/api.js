@@ -18,7 +18,7 @@ var api = {
             path: path + content,
             method: "get"
         };
-        //console.log(options);
+        console.log(options);
         //创建请求
         var req = http.request(options, function (res) {
             console.log('STATUS:' + res.statusCode);

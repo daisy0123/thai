@@ -43,7 +43,7 @@ router.post('/search/', function (req,res) {
     var path='/discover/search_notes/?';
     var search_word={'search_word':search};
     api.get(search_word,path).then(function (data) {
-       res.json(data);
+        res.json(data);
         console.log(data);
     });
 });

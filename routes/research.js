@@ -42,6 +42,14 @@ router.get('/scenic/:scene_name',function(req,res){
         res.render('research/scenic', scenic);
     });
 });
+router.post('/chart',function(req,res) {
+    var chartdata = req.body.scene;
+    var path = '/search/search/?';
+    var search_word = {'search_word': chartdata};
+    api.get(search_word, path).then(function (data) {
+        res.json(data);
+    });
+});
 
 router.get('/search/:scene_name',function(req,res){
     var params = url.parse(req.url, true).query;
@@ -57,6 +65,17 @@ router.get('/search/:scene_name',function(req,res){
             scene:data
         };
         res.render('research/search', scene);
+    });
+});
+
+router.post('/comment',function(req,res){
+    var scene=req.body.scene;
+    var offset=req.body.offset;
+    var lang=req.body.lang;
+    var path='/search/get_comments/?';
+    var search_word={'scene':scene,'offset':offset,"lang":lang};
+    api.get(search_word,path).then(function (data) {
+        res.json(data);
     });
 });
 

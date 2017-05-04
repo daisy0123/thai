@@ -12,8 +12,26 @@ define(function (require,exports,module) {
         "search": function (word) {
             var url="/article/search/";
             var data={word:word};
+
+            var search_a=$(".search_a");
+            var search_img=$(".search_img");
+            var search_h2_a=$(".search_h2_a");
+            var search_small_a=$(".search_small_a");
+
             api.send(url,"post",data).then(function (result){
-                //console.log(result);
+                if(result){
+                    for(var i=0;i<result.length;i++){
+                        search_a[i].setAttribute("href","/article/content/"+result[i].id);
+                        search_img[i].setAttribute("src",result[i].picture);
+                        search_img[i].setAttribute("alt",result[i].title);
+                        search_h2_a[i].setAttribute("href","/article/content/"+result[i].id);
+                        search_h2_a[i].innerHTML=result[i].title;
+                        search_small_a[i].setAttribute("href","/article/content/"+result[i].id);
+                        search_small_a[i].innerHTML=result[i].author;
+                    }
+                    $(".article-con").hide();
+                    $(".search-con").show();
+                }
             });
         },
         "redirect": function () {
@@ -26,6 +44,7 @@ define(function (require,exports,module) {
     };
     module.exports={
         "main":function(){
+            $(".search-con").hide();
             event.hover3d();
             event.redirect();
             this.init();

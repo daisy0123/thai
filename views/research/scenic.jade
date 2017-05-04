@@ -1,13 +1,11 @@
 extends ../public/layout
 
 block content
-    script(src="http://echarts.baidu.com/build/dist/echarts.js")
-    script(src="/javascript/utils/chart.js")
 
-    div.container-fuild
+    div.container-fuild.scenic-container
         .row
             .col-md-10.col-md-offset-1.scenic-title
-                h3=scenic.scene_name
+                h3.scene_name=scenic.scene_name
             .col-md-10.col-md-offset-1.scenic-navbar
                 div.row(id="scenic-navbar")
                     ul(class="scenic-navbar-ul")
@@ -96,9 +94,9 @@ block content
                 .col-md-10.col-md-offset-1
                     h4 评价详情
                     ul.row.selection
-                        li 中
-                        li 美
-                        li 泰
+                        li.line_active(id="chi") 中
+                        li(id="eng") 美
+                        li(id="thai") 泰
                         span.line-slide
                 .col-md-10.col-md-offset-1.comment-tag
                     -for(var i=0;i<3;i++)
@@ -106,41 +104,9 @@ block content
                     span 热闹(121)
                     span 好玩(142)
                 .col-md-10.col-md-offset-1.comment-content
-                    -for(var i=0;i<3;i++)
-                    .col-md-12
-                        div(class="media media-block")
-                            div(class="media-left")
-                                a(href="#")
-                                    img(class="media-object media-img" src="/image/index_sea/lanmiao.jpg" alt="...")
-                                p 旅游达人
-                                p
-                                    i(class="fa fa-star" aria-hidden="true")
-                                    i(class="fa fa-star" aria-hidden="true")
-                                    i(class="fa fa-star" aria-hidden="true")
-                                    i(class="fa fa-star" aria-hidden="true")
-                            div(class="media-body")
-                                p 斯米兰群岛斯米兰群岛斯米兰群岛斯米兰群岛斯米兰群岛斯米兰群岛斯米兰群岛斯米兰群岛斯米兰群岛斯米兰群岛斯米兰群岛
-                                button(class="btn btn-default tranlation" type="submit") 翻译
 
-                .col-md-10.col-md-offset-1.page-show
-                    nav(aria-label="Page navigation")
-                        ul(class="pagination")
-                            li
-                                a(href="#" aria-label="Previous")
-                                    span(aria-hidden="true") &laquo;
-                            li
-                                a(href="#") 1
-                            li
-                                a(href="#") 2
-                            li
-                                a(href="#") ...
-                            li
-                                a(href="#") 4
-                            li
-                                a(href="#") 5
-                            li
-                                a(href="#" aria-label="Next")
-                                    span(aria-hidden="true") &raquo;
+
+
 
         .backtotop
             i(class="fa fa-2x fa-angle-up" aria-hidden="true")
