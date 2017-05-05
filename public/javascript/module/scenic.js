@@ -8,10 +8,10 @@ define(function (require, exports, module) {
     var myfocus = require('myfocus');
     var api = require('api');
     var chart = {
-        "bar": function (word, score) {
+        "bar": function (word, score,id) {
             var barOption = {
                 title: {
-                    text: '词语频率显示',
+                    text: '词语评分显示',
                     subtext: ''
                 },
                 tooltip: {
@@ -41,14 +41,14 @@ define(function (require, exports, module) {
                 yAxis: [
                     {
                         type: 'category',
-                        data: ['词语', '词语', '词语', '词语', '词语', '词语', '词语', '词语', '词语', '词语', '词语', '词语']
+                        data: word
                     }
                 ],
                 series: [
                     {
-                        name: '2011年',
+                        name: '评分',
                         type: 'bar',
-                        data: [18203, 23489, 29034, 104970, 131744, 630230, 18203, 23489, 29034, 104970, 131744, 630230]
+                        data: score
                     }
                 ]
             };
@@ -58,12 +58,12 @@ define(function (require, exports, module) {
                     'echarts/chart/bar',
                 ],
                 function (ec) {
-                    var barChart = ec.init(document.getElementById('bar-chart-page'));
+                    var barChart = ec.init(document.getElementById(id));
                     barChart.setOption(barOption);
                 }
             );
         },
-        "pie": function () {
+        "pie": function (color,name,data,id) {
             var pieOption = {
                 title: {
                     text: '中',
@@ -75,10 +75,12 @@ define(function (require, exports, module) {
                     formatter: "{a} <br/>{b} : {c} ({d}%)"
                 },
                 legend: {
+                    show:false,
                     orient: 'vertical',
                     x: 'left',
-                    data: ['直接访问', '邮件营销', '联盟广告']
+                    data: {}
                 },
+                color:color,
                 toolbox: {
                     show: false,
                     feature: {
@@ -103,15 +105,11 @@ define(function (require, exports, module) {
                 calculable: true,
                 series: [
                     {
-                        name: '访问来源',
+                        name: name,
                         type: 'pie',
                         radius: '55%',
                         center: ['50%', '60%'],
-                        data: [
-                            {value: 335, name: '直接访问'},
-                            {value: 310, name: '邮件营销'},
-                            {value: 234, name: '联盟广告'}
-                        ]
+                        data: data
                     }
                 ]
             };
@@ -122,32 +120,31 @@ define(function (require, exports, module) {
 
                 ],
                 function (ec) {
-                    var pieChart = ec.init(document.getElementById('pie1-chart-page'));
-                    pieChart.setOption(pieOption);
-                    var pieChart = ec.init(document.getElementById('pie2-chart-page'));
-                    pieChart.setOption(pieOption);
-                    var pieChart = ec.init(document.getElementById('pie3-chart-page'));
+                    var pieChart = ec.init(document.getElementById(id));
                     pieChart.setOption(pieOption);
                 }
             );
         }
     };
-    var add_comment = {
+
+    var self = {
         "add_com": function (result) {
             var add = "";
             for (var i = 0; i < 5; i++) {
-                var star = "";
-                for (var j = 0; j < result.comments[i].score; j++) {
+                var star = "";var translate="";
+                for (var j = 0; j < result.data.comments[i].score; j++) {
                     star = star + "<i aria-hidden='true' class='fa fa-star'></i>";
                 }
+                if(result.lang=="eng"||result.lang=="thai"){
+                    translate="<button class='btn btn-default tranlation' id="+result.data.comments[i].index+">翻译</button> ";
+                }
                 add = add + "<div class='col-md-12'> " +
-                    "<div class='media media-block comment-show'> " +
+                    "<div class='media media-block comment-show'id="+result.lang+"> " +
                     "<div class='media-left'>" +
-                    "<a href='#'><img src='" + result.comments[i].head + "' alt='...' class='media-object media-img'/></a> " +
-                    "<p>" + result.comments[i].user_label + "</p><p>" + star + "</p></div> " +
+                    "<a href='#'><img src='" + result.data.comments[i].head + "' alt='...' class='media-object media-img'/></a> " +
+                    "<p>" + result.data.comments[i].user_label + "</p><p>" + star + "</p></div> " +
                     "<div class='media-body'> " +
-                    "<p>" + result.comments[i].content + "</p> " +
-                    "<button type='submit' class='btn btn-default tranlation'>翻译</button> " +
+                    "<p>" + result.data.comments[i].content + "</p> " + translate+
                     "</div> </div> </div>";
             }
             return add;
@@ -169,8 +166,17 @@ define(function (require, exports, module) {
                     offset = offset + 1;
                     var data = {scene: scene, offset: offset, lang: lang};
                     api.send(url, "post", data).then(function (result) {
-                        var add = add_comment.add_com(result);
-                        main.append(add);
+                        if(result.adj_words){
+                            var tag="";
+                            for(var i=0;i<result.adj_words.words.length;i++){
+                                tag=tag+"<span>"+result.adj_words.words[i]+"["+result.adj_words.values[i]+"]"+"</span>"
+                            }
+                            $(".comment-tag").append(tag);
+                        }
+                        if(result){
+                            var add = self.add_com(result);
+                            main.append(add);
+                        }
                     });
                 }
             });
@@ -235,10 +241,17 @@ define(function (require, exports, module) {
         },
         //地图的导入
         "mapIn": function () {
-            var map = new BMap.Map("allmap");            // 创建Map实例
-            var point = new BMap.Point(116.404, 39.915); // 创建点坐标
-            map.centerAndZoom(point, 15);                 // 初始化地图,设置中心点坐标和地图级别。
-            map.addControl(new BMap.ZoomControl());
+            var url = "/research/chart";
+            var scene = $(".scene_name").html();
+            var data = {scene: scene};
+            api.send(url, "post", data).then(function (result) {
+                // 百度地图API功能
+                var map = new BMap.Map("allmap");    // 创建Map实例
+                map.centerAndZoom(new BMap.Point(result.y,result.x), 11);  // 初始化地图,设置中心点坐标和地图级别
+                map.addControl(new BMap.MapTypeControl());   //添加地图类型控件
+                map.setCurrentCity("北京");          // 设置地图显示的城市 此项是必须设置的
+                map.enableScrollWheelZoom(true);     //开启鼠标滚轮缩放
+            });
         },
         "myFocus": function () {
             myFocus.set({
@@ -254,15 +267,28 @@ define(function (require, exports, module) {
             var url = "/research/chart";
             var scene = $(".scene_name").html();
             var data = {scene: scene};
-            //api.send(url, "post", data).then(function (result) {
-            //    console.log(result);
-            //});
-            chart.bar(null, null);
-            chart.pie();
+            api.send(url, "post", data).then(function (result) {
+                if((result.tag.bar.score.length)>0){
+                    chart.bar(result.tag.bar.top_words, result.tag.bar.score,'bar-chart-page');
+                }
+                if((result.tag.pie.chi.data.length)>0){
+                    chart.pie(result.tag.pie.chi.color,"中",result.tag.pie.chi.data,"pie1-chart-page");
+                }
+                if((result.tag.pie.eng.data.length)>0){
+                    chart.pie(result.tag.pie.chi.color,"美",result.tag.pie.eng.data,"pie2-chart-page");
+                }
+                if((result.tag.pie.thai.data.length)>0) {
+                    chart.pie(result.tag.pie.chi.color, "泰", result.tag.pie.thai.data, "pie3-chart-page");
+                }
+            });
+        },
+        'translate': function () {
+            alert("ok")
         }
     };
     module.exports = {
         "main": function () {
+            this.init();
             event.myFocus();
             event.srcollSlide();
             event.backToTop();
@@ -270,10 +296,10 @@ define(function (require, exports, module) {
             event.mapIn();
             commentfun.comment("chi");
             event.get_chart_data();
-            this.init();
         },
         'init': function () {
             $(".selection>li").click(event.lineChange);
+
         }
     }
 });

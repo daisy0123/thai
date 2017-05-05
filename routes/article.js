@@ -45,7 +45,6 @@ router.post('/search/', function (req,res) {
     var search_word={'search_word':search};
     api.get(search_word,path).then(function (data) {
         res.json(data);
-        //res.render('article/content',data.length);
     });
 });
 module.exports = router;

@@ -74,8 +74,24 @@ router.post('/comment',function(req,res){
     var lang=req.body.lang;
     var path='/search/get_comments/?';
     var search_word={'scene':scene,'offset':offset,"lang":lang};
-    api.get(search_word,path).then(function (data) {
-        res.json(data);
+    api.get(search_word,path).then(function (result) {
+        var comment={
+          data:result,
+          lang:lang
+        };
+        res.json(comment);
+    });
+});
+
+router.post('/translate/:scene/:index/:lang', function () {
+    var scene=req.body.scene;
+    var index=req.body.index;
+    var lang=req.body.lang;
+    var path='/search/get_translate/?';
+    var search_word={'scene':scene,'index':index,"lang":lang};
+    api.get(search_word,path).then(function (result){
+        console.log(result);
+        res.json(result);
     });
 });
 

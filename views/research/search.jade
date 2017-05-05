@@ -13,28 +13,18 @@ block content
                             img(src="/image/scenic/loading.gif" alt="请稍候...")
                         .pic
                             ul
-                                li
-                                    a(href="#")
-                                        img(src="/image/index_sea/sea1.jpg" thumb="" alt="" text="")
-                                li
-                                    a(href="#")
-                                        img(src="/image/index_sea/sea1.jpg" thumb="" alt="" text="")
-                                li
-                                    a(href="#")
-                                        img(src="/image/index_sea/sea1.jpg" thumb="" alt="" text="")
-                                li
-                                    a(href="#")
-                                        img(src="/image/index_sea/sea1.jpg" thumb="" alt="" text="")
-                                li
-                                    a(href="#")
-                                        img(src="/image/index_sea/sea1.jpg" thumb="" alt="" text="")
+                                -for(var i=0;i<scene.picture.length;i++)
+                                    li
+                                        a(href="#")
+                                            img(src=scene.picture[i] thumb="" alt="" text="")
+
 
                 .search-right
                     .search-mess
                         h5 景点介绍
                         p=scene.introduction
                     .serch-button
-                        a(class="btn btn-default" href="/research/" role="button") 共有
+                        a(class="btn btn-default" href="" role="button") 共有
                             span=scene.scene_num
                             | 个景点
 

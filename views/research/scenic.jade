@@ -39,7 +39,7 @@ block content
                         .col-md-7.message-intro
                             h4 概览
                             .col-md-12.ppadding
-                                p=scenic.introduction
+                                p=scenic.description
                         .col-md-5.message-star
                             h4 星级评价
                             .col-md-10.col-md-offset-1.message-score
@@ -74,7 +74,7 @@ block content
                     h4 景点地址
                     .col-md-8.map-show(id="allmap")
                     .col-md-4
-                        span.small 地址名称
+                        span.small
 
             div.scenic-section.row(id="scenic-analyse")
                 .col-md-10.col-md-offset-1
@@ -99,10 +99,7 @@ block content
                         li(id="thai") 泰
                         span.line-slide
                 .col-md-10.col-md-offset-1.comment-tag
-                    -for(var i=0;i<3;i++)
-                    span 人多(100)
-                    span 热闹(121)
-                    span 好玩(142)
+
                 .col-md-10.col-md-offset-1.comment-content
 
 

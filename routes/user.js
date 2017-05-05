@@ -24,18 +24,18 @@ router.get('/login',function(req,res){
 });
 
 router.post('/register',function(req,res) {
-    var username=req.body.username;
-    var password=req.body.password;
-    var user={account:username,password:password};
-    var path="";
-    // var b = new Buffer("java");
-    // var s = b.toString('base64');
+    var username = req.body.username;
+    var password = req.body.password;
+    var user = {account: username, password: password};
+    var path = "";
+    var pass = new Buffer(password);
+    var password = pass.toString('base64');
     //console.log(s);
-    // api.post(user,path).then(function () {
-    //
+    // api.post(user,path).then(function (result) {
+    //      if(result){}
     // });
-    console.log(user);
-    res.end();
+    //console.log(user);
+    //res.end();
 });
 
 router.post('/login',function (req,res) {
@@ -48,8 +48,8 @@ router.post('/login',function (req,res) {
     // api.post(user,path).then(function () {
     //
     // });
-    console.log(user);
-    res.end();
+    //console.log(user);
+    //res.end();
 });
 
 module.exports = router;
