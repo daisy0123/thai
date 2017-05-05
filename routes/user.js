@@ -1,6 +1,7 @@
 var express = require('express');
 var nav = require('./navbar');
 var router = express.Router();
+var api=require('./utils/api')
 
 router.get('/register',function(req,res){
     var data = {
@@ -20,6 +21,35 @@ router.get('/login',function(req,res){
         title: "用户登录"
     };
     res.render('user/login', data);
+});
+
+router.post('/register',function(req,res) {
+    var username=req.body.username;
+    var password=req.body.password;
+    var user={account:username,password:password};
+    var path="";
+    // var b = new Buffer("java");
+    // var s = b.toString('base64');
+    //console.log(s);
+    // api.post(user,path).then(function () {
+    //
+    // });
+    console.log(user);
+    res.end();
+});
+
+router.post('/login',function (req,res) {
+    var username=req.body.username;
+    var password=req.body.password;
+    var user={account:username,password:password};
+    var path="";
+    //var b = new Buffer('SmF2YVNjcmlwdA==', 'base64')
+    //var s = b.toString();
+    // api.post(user,path).then(function () {
+    //
+    // });
+    console.log(user);
+    res.end();
 });
 
 module.exports = router;
