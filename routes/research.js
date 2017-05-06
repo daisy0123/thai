@@ -42,6 +42,27 @@ router.get('/scenic/:scene_name',function(req,res){
         res.render('research/scenic', scenic);
     });
 });
+
+router.get('/bigSearch/:scene_name/:offset',function(req,res){
+    var params = url.parse(req.url, true).query;
+    var scene=req.params.scene_name;
+    var offset=req.params.offset;
+    var path='/search/get_scene_list/?';
+    var search_word={'scene_name': scene,offset:offset};
+    api.get(search_word,path).then(function (data) {
+        var bigSearch = {
+            nav: nav.create(req),
+            key: 'bigSearch',
+            point:'research',
+            title: "热门搜索",
+            hotsearch: data,
+            page: offset,
+            scene_name:scene
+        };
+        res.render('research/bigSearch', bigSearch);
+    });
+});
+
 router.post('/chart',function(req,res) {
     var chartdata = req.body.scene;
     var path = '/search/search/?';
@@ -83,14 +104,13 @@ router.post('/comment',function(req,res){
     });
 });
 
-router.post('/translate/:scene/:index/:lang', function () {
+router.post('/translate/', function (req,res) {
     var scene=req.body.scene;
     var index=req.body.index;
     var lang=req.body.lang;
     var path='/search/get_translate/?';
-    var search_word={'scene':scene,'index':index,"lang":lang};
+    var search_word={'scene_name':scene,'index':index,"lang":lang};
     api.get(search_word,path).then(function (result){
-        console.log(result);
         res.json(result);
     });
 });

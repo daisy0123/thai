@@ -126,7 +126,6 @@ define(function (require, exports, module) {
             );
         }
     };
-
     var self = {
         "add_com": function (result) {
             var add = "";
@@ -144,7 +143,7 @@ define(function (require, exports, module) {
                     "<a href='#'><img src='" + result.data.comments[i].head + "' alt='...' class='media-object media-img'/></a> " +
                     "<p>" + result.data.comments[i].user_label + "</p><p>" + star + "</p></div> " +
                     "<div class='media-body'> " +
-                    "<p>" + result.data.comments[i].content + "</p> " + translate+
+                    "<p class='p-com'>" + result.data.comments[i].content + "</p> " + translate+
                     "</div> </div> </div>";
             }
             return add;
@@ -153,17 +152,20 @@ define(function (require, exports, module) {
     var commentfun = {
         "comment": function (lang) {
             var totalheight = 0;
-            var main = $(".comment-content");
+            var chi_page = $(".chi-page");
+            var eng_page=$(".eng-page");
+            var thai_page=$(".thai-page");
             var scene = $(".scene_name").html();
-            var offset = -1;
-            main.html(" ");
+            var offset = 0;
+            chi_page.html(" ");
+            eng_page.html(" ");
+            thai_page.html(" ");
             $(window).scroll(function () {
-                var srollPos = $(window).scrollTop();    //滚动条距顶部距离(页面超出窗口的高度)
+                var srollPos = $(window).scrollTop();
                 totalheight = parseFloat($(window).height()) + parseFloat(srollPos);
                 var add = "";
                 if (($(document).height()) <= totalheight) {
                     var url = "/research/comment";
-                    offset = offset + 1;
                     var data = {scene: scene, offset: offset, lang: lang};
                     api.send(url, "post", data).then(function (result) {
                         if(result.adj_words){
@@ -175,11 +177,20 @@ define(function (require, exports, module) {
                         }
                         if(result){
                             var add = self.add_com(result);
-                            main.append(add);
+                            if(result.lang=="chi"){
+                                chi_page.append(add);
+                            }else if(result.lang=="eng"){
+                                eng_page.append(add);
+                            }else if(result.lang=="thai"){
+                                thai_page.append(add);
+                            }
+                            event.translate();
                         }
+                        offset = offset + 1;
                     });
                 }
             });
+
         }
     };
     var event = {
@@ -234,9 +245,13 @@ define(function (require, exports, module) {
             $(this).siblings().removeClass("line_active");
             $(this).addClass("line_active");
             var lang = $(this).attr("id");
+            var lang_page=lang+"-page";
             var liLen = 77;
             var left = $(this).index() * liLen + 1;
             $(".line-slide").animate({left: left + 'px'}, 200);
+            $(".span-more").hide(1000);
+            $("."+lang_page).siblings().hide();
+            $("."+lang_page).show();
             commentfun.comment(lang);
         },
         //地图的导入
@@ -283,7 +298,18 @@ define(function (require, exports, module) {
             });
         },
         'translate': function () {
-            alert("ok")
+            var scene = $(".scene_name").html();
+            $(".tranlation").click(function () {
+                var index=$(this).attr("id");
+                var parent=$(this).parents(".comment-show");
+                var lang=parent.attr("id");
+                var url="/research/translate";
+                var init=parent.find(".p-com").html();
+                var data={scene:scene,index:index,lang:lang};
+                api.send(url,"post",data).then(function(result){
+                    parent.find(".p-com").html(result.content);
+                });
+            });
         }
     };
     module.exports = {
@@ -294,12 +320,13 @@ define(function (require, exports, module) {
             event.backToTop();
             event.chartTag();
             event.mapIn();
-            commentfun.comment("chi");
             event.get_chart_data();
         },
         'init': function () {
             $(".selection>li").click(event.lineChange);
-
+            $(".chi-page").hide();
+            $(".thai-page").hide();
+            $(".eng-page").hide();
         }
     }
 });

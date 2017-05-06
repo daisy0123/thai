@@ -24,7 +24,7 @@ block content
                         h5 景点介绍
                         p=scene.introduction
                     .serch-button
-                        a(class="btn btn-default" href="" role="button") 共有
+                        a(class="btn btn-default" href="/research/bigSearch/"+scene.scene_name+"/"+1 role="button") 共有
                             span=scene.scene_num
                             | 个景点
 
@@ -47,10 +47,10 @@ block content
                                                         i(class="fa fa-star" aria-hidden="true")
                                             p
                                                 span 美:&nbsp;
-                                                    -for(var j=0;j<scene.recommend_scene[i].score[2];j++)
+                                                    -for(var j=0;j<scene.recommend_scene[i].score[1];j++)
                                                         i(class="fa fa-star" aria-hidden="true")
                                             p
                                                 span 泰:&nbsp;
-                                                    -for(var j=0;j<scene.recommend_scene[i].score[4];j++)
+                                                    -for(var j=0;j<scene.recommend_scene[i].score[2];j++)
                                                         i(class="fa fa-star" aria-hidden="true")
 
