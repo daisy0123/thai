@@ -8,7 +8,7 @@ define(function (require, exports, module) {
     var myfocus = require('myfocus');
     var api = require('api');
     var chart = {
-        "bar": function (word, score,id) {
+        "bar": function (word, score, id) {
             var barOption = {
                 title: {
                     text: '词语评分显示',
@@ -63,7 +63,7 @@ define(function (require, exports, module) {
                 }
             );
         },
-        "pie": function (color,name,data,id) {
+        "pie": function (color, name, data, id) {
             var pieOption = {
                 title: {
                     text: '中',
@@ -75,12 +75,12 @@ define(function (require, exports, module) {
                     formatter: "{a} <br/>{b} : {c} ({d}%)"
                 },
                 legend: {
-                    show:false,
+                    show: false,
                     orient: 'vertical',
                     x: 'left',
                     data: {}
                 },
-                color:color,
+                color: color,
                 toolbox: {
                     show: false,
                     feature: {
@@ -130,20 +130,21 @@ define(function (require, exports, module) {
         "add_com": function (result) {
             var add = "";
             for (var i = 0; i < 5; i++) {
-                var star = "";var translate="";
+                var star = "";
+                var translate = "";
                 for (var j = 0; j < result.data.comments[i].score; j++) {
                     star = star + "<i aria-hidden='true' class='fa fa-star'></i>";
                 }
-                if(result.lang=="eng"||result.lang=="thai"){
-                    translate="<button class='btn btn-default tranlation' id="+result.data.comments[i].index+">翻译</button> ";
+                if (result.lang == "eng" || result.lang == "thai") {
+                    translate = "<button class='btn btn-default tranlation' id=" + result.data.comments[i].index + ">翻译</button> ";
                 }
                 add = add + "<div class='col-md-12'> " +
-                    "<div class='media media-block comment-show'id="+result.lang+"> " +
+                    "<div class='media media-block comment-show'id=" + result.lang + "> " +
                     "<div class='media-left'>" +
                     "<a href='#'><img src='" + result.data.comments[i].head + "' alt='...' class='media-object media-img'/></a> " +
                     "<p>" + result.data.comments[i].user_label + "</p><p>" + star + "</p></div> " +
                     "<div class='media-body'> " +
-                    "<p class='p-com'>" + result.data.comments[i].content + "</p> " + translate+
+                    "<p class='p-com'>" + result.data.comments[i].content + "</p> " + translate +
                     "</div> </div> </div>";
             }
             return add;
@@ -152,14 +153,20 @@ define(function (require, exports, module) {
     var commentfun = {
         "comment": function (lang) {
             var totalheight = 0;
-            var chi_page = $(".chi-page");
-            var eng_page=$(".eng-page");
-            var thai_page=$(".thai-page");
+            var chi_com = $(".chi-com");
+            var eng_com = $(".eng-com");
+            var thai_com = $(".thai-com");
+            var chi_tag=$(".chi-tag");
+            var eng_tag=$(".eng-tag");
+            var thai_tag=$('.thai-tag');
             var scene = $(".scene_name").html();
             var offset = 0;
-            chi_page.html(" ");
-            eng_page.html(" ");
-            thai_page.html(" ");
+            chi_com.html(" ");
+            chi_tag.html(" ");
+            eng_com.html(" ");
+            eng_tag.html(" ");
+            thai_com.html(" ");
+            thai_tag.html(" ");
             $(window).scroll(function () {
                 var srollPos = $(window).scrollTop();
                 totalheight = parseFloat($(window).height()) + parseFloat(srollPos);
@@ -168,25 +175,35 @@ define(function (require, exports, module) {
                     var url = "/research/comment";
                     var data = {scene: scene, offset: offset, lang: lang};
                     api.send(url, "post", data).then(function (result) {
-                        if(result.adj_words){
-                            var tag="";
-                            for(var i=0;i<result.adj_words.words.length;i++){
-                                tag=tag+"<span>"+result.adj_words.words[i]+"["+result.adj_words.values[i]+"]"+"</span>"
-                            }
-                            $(".comment-tag").append(tag);
-                        }
-                        if(result){
+                        if (result.data.comments) {
                             var add = self.add_com(result);
-                            if(result.lang=="chi"){
-                                chi_page.append(add);
-                            }else if(result.lang=="eng"){
-                                eng_page.append(add);
-                            }else if(result.lang=="thai"){
-                                thai_page.append(add);
+                            var tag = "";
+                            if(result.data.adj_words=="暂无标签"){
+                                tag="暂无标签"
+                            }else{
+                                if( result.data.adj_words){
+                                    for (var i = 0; i < result.data.adj_words.words.length; i++) {
+                                        tag = tag + "<span>" + result.data.adj_words.words[i] + "[" + result.data.adj_words.values[i] + "]" + "</span>"
+                                    }
+                                }
                             }
+                            if (result.lang == "chi") {
+                                chi_tag.append(tag);
+                                chi_com.append(add);
+                            } else if (result.lang == "eng") {
+                                eng_tag.append(tag);
+                                eng_com.append(add);
+                            } else if (result.lang == "thai") {
+                                thai_tag.append(tag);
+                                thai_com.append(add);
+                            }
+                            offset = offset + 1;
                             event.translate();
+                        }else {
+                            if($(".com-com").html()==" "){
+                                $(".com-com").append('你已经看完所有评论！');
+                            }
                         }
-                        offset = offset + 1;
                     });
                 }
             });
@@ -245,13 +262,13 @@ define(function (require, exports, module) {
             $(this).siblings().removeClass("line_active");
             $(this).addClass("line_active");
             var lang = $(this).attr("id");
-            var lang_page=lang+"-page";
+            var lang_page = lang + "-page";
             var liLen = 77;
             var left = $(this).index() * liLen + 1;
             $(".line-slide").animate({left: left + 'px'}, 200);
             $(".span-more").hide(1000);
-            $("."+lang_page).siblings().hide();
-            $("."+lang_page).show();
+            $("." + lang_page).siblings().hide();
+            $("." + lang_page).show();
             commentfun.comment(lang);
         },
         //地图的导入
@@ -262,7 +279,7 @@ define(function (require, exports, module) {
             api.send(url, "post", data).then(function (result) {
                 // 百度地图API功能
                 var map = new BMap.Map("allmap");    // 创建Map实例
-                map.centerAndZoom(new BMap.Point(result.y,result.x), 11);  // 初始化地图,设置中心点坐标和地图级别
+                map.centerAndZoom(new BMap.Point(result.y, result.x), 11);  // 初始化地图,设置中心点坐标和地图级别
                 map.addControl(new BMap.MapTypeControl());   //添加地图类型控件
                 map.setCurrentCity("北京");          // 设置地图显示的城市 此项是必须设置的
                 map.enableScrollWheelZoom(true);     //开启鼠标滚轮缩放
@@ -283,30 +300,34 @@ define(function (require, exports, module) {
             var scene = $(".scene_name").html();
             var data = {scene: scene};
             api.send(url, "post", data).then(function (result) {
-                if((result.tag.bar.score.length)>0){
-                    chart.bar(result.tag.bar.top_words, result.tag.bar.score,'bar-chart-page');
+                if(result.tag.bar){
+                    if ((result.tag.bar.score.length) > 0) {
+                        chart.bar(result.tag.bar.top_words, result.tag.bar.score, 'bar-chart-page');
+                    }
                 }
-                if((result.tag.pie.chi.data.length)>0){
-                    chart.pie(result.tag.pie.chi.color,"中",result.tag.pie.chi.data,"pie1-chart-page");
-                }
-                if((result.tag.pie.eng.data.length)>0){
-                    chart.pie(result.tag.pie.chi.color,"美",result.tag.pie.eng.data,"pie2-chart-page");
-                }
-                if((result.tag.pie.thai.data.length)>0) {
-                    chart.pie(result.tag.pie.chi.color, "泰", result.tag.pie.thai.data, "pie3-chart-page");
+                if(result.tag.pie){
+                    if ((result.tag.pie.chi.data.length) > 0) {
+                        chart.pie(result.tag.pie.chi.color, "中", result.tag.pie.chi.data, "pie1-chart-page");
+                    }
+                    if ((result.tag.pie.eng.data.length) > 0) {
+                        chart.pie(result.tag.pie.chi.color, "美", result.tag.pie.eng.data, "pie2-chart-page");
+                    }
+                    if ((result.tag.pie.thai.data.length) > 0) {
+                        chart.pie(result.tag.pie.chi.color, "泰", result.tag.pie.thai.data, "pie3-chart-page");
+                    }
                 }
             });
         },
         'translate': function () {
             var scene = $(".scene_name").html();
             $(".tranlation").click(function () {
-                var index=$(this).attr("id");
-                var parent=$(this).parents(".comment-show");
-                var lang=parent.attr("id");
-                var url="/research/translate";
-                var init=parent.find(".p-com").html();
-                var data={scene:scene,index:index,lang:lang};
-                api.send(url,"post",data).then(function(result){
+                var index = $(this).attr("id");
+                var parent = $(this).parents(".comment-show");
+                var lang = parent.attr("id");
+                var url = "/research/translate";
+                var init = parent.find(".p-com").html();
+                var data = {scene: scene, index: index, lang: lang};
+                api.send(url, "post", data).then(function (result) {
                     parent.find(".p-com").html(result.content);
                 });
             });
