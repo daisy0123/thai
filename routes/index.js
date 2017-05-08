@@ -3,7 +3,7 @@ var nav = require('./navbar');
 var router = express.Router();
 var api=require('./utils/api');
 
-router.get('/',function(req,res){
+router.get('/',function(req,res,next){
     var path="/search/home";
     api.post(path,null).then(function (data) {
         var index = {
@@ -15,11 +15,16 @@ router.get('/',function(req,res){
         };
         res.render('index', index);
     });
+    //api.get({},'/search/test').then(function(data){
+    //    //res.render('404',{title:'404 Not Found!'});
+    //    //res.redirect('404');
+    //}, function (data) {
+    //    console.log("no")
+    //})
 });
 
 router.post('/searchword',function(req,res,next){
     var word = req.body.word;
-    console.log(word);
     var path='/search/search/?';
     var data={'search_word':word};
     api.get(data,path).then(function (data) {

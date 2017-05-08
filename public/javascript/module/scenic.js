@@ -66,7 +66,7 @@ define(function (require, exports, module) {
         "pie": function (color, name, data, id) {
             var pieOption = {
                 title: {
-                    text: '中',
+                    text: name,
                     subtext: '',
                     x: 'center'
                 },
@@ -310,10 +310,10 @@ define(function (require, exports, module) {
                         chart.pie(result.tag.pie.chi.color, "中", result.tag.pie.chi.data, "pie1-chart-page");
                     }
                     if ((result.tag.pie.eng.data.length) > 0) {
-                        chart.pie(result.tag.pie.chi.color, "美", result.tag.pie.eng.data, "pie2-chart-page");
+                        chart.pie(result.tag.pie.eng.color, "美", result.tag.pie.eng.data, "pie2-chart-page");
                     }
                     if ((result.tag.pie.thai.data.length) > 0) {
-                        chart.pie(result.tag.pie.chi.color, "泰", result.tag.pie.thai.data, "pie3-chart-page");
+                        chart.pie(result.tag.pie.thai.color, "泰", result.tag.pie.thai.data, "pie3-chart-page");
                     }
                 }
             });

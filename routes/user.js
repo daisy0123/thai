@@ -3,7 +3,7 @@ var nav = require('./navbar');
 var router = express.Router();
 var api=require('./utils/api')
 
-router.get('/register',function(req,res){
+router.get('/register',function(req,res,next){
     var data = {
         nav: nav.create(req),
         key: 'register',
@@ -13,7 +13,7 @@ router.get('/register',function(req,res){
     res.render('user/register', data);
 });
 
-router.get('/login',function(req,res){
+router.get('/login',function(req,res,next){
     var data = {
         nav: nav.create(req),
         key: 'login',
@@ -23,7 +23,7 @@ router.get('/login',function(req,res){
     res.render('user/login', data);
 });
 
-router.post('/register',function(req,res) {
+router.post('/register',function(req,res,next) {
     var username = req.body.username;
     var password = req.body.password;
     var user = {account: username, password: password};
@@ -38,7 +38,7 @@ router.post('/register',function(req,res) {
     //res.end();
 });
 
-router.post('/login',function (req,res) {
+router.post('/login',function (req,res,next) {
     var username=req.body.username;
     var password=req.body.password;
     var user={account:username,password:password};

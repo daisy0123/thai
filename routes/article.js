@@ -4,7 +4,7 @@ var url=require('url');
 var router = express.Router();
 var api=require('./utils/api');
 
-router.get('/:page',function(req,res){
+router.get('/:page',function(req,res,next){
     var params = url.parse(req.url, true).query;
     var page=req.params.page;
     var path='/discover/get_travel_note_list/?';
@@ -22,7 +22,7 @@ router.get('/:page',function(req,res){
     });
 });
 
-router.get('/content/:id',function(req,res){
+router.get('/content/:id',function(req,res,next){
     var params = url.parse(req.url, true).query;
     var id=req.params.id;
     var path='/discover/get_travel_note/?';
@@ -39,7 +39,7 @@ router.get('/content/:id',function(req,res){
     });
 });
 
-router.post('/search/', function (req,res) {
+router.post('/search/', function (req,res,next) {
     var search=req.body.word;
     var path='/discover/search_notes/?';
     var search_word={'search_word':search};

@@ -4,7 +4,7 @@ var router = express.Router();
 var url = require('url');
 var api=require('./utils/api');
 
-router.get('/:page',function(req,res){
+router.get('/:page',function(req,res,next){
     var params = url.parse(req.url, true).query;
     var page=req.params.page;
     var path='/search/hotsearch/?';
@@ -26,7 +26,7 @@ router.get('/:page',function(req,res){
     });
 });
 
-router.get('/scenic/:scene_name',function(req,res){
+router.get('/scenic/:scene_name',function(req,res,next){
     var params = url.parse(req.url, true).query;
     var scene_name=req.params.scene_name;
     var path='/search/search/?';
@@ -43,7 +43,7 @@ router.get('/scenic/:scene_name',function(req,res){
     });
 });
 
-router.get('/bigSearch/:scene_name/:offset',function(req,res){
+router.get('/bigSearch/:scene_name/:offset',function(req,res,next){
     var params = url.parse(req.url, true).query;
     var scene=req.params.scene_name;
     var offset=req.params.offset;
@@ -63,7 +63,7 @@ router.get('/bigSearch/:scene_name/:offset',function(req,res){
     });
 });
 
-router.post('/chart',function(req,res) {
+router.post('/chart',function(req,res,next) {
     var chartdata = req.body.scene;
     var path = '/search/search/?';
     var search_word = {'search_word': chartdata};
@@ -72,7 +72,7 @@ router.post('/chart',function(req,res) {
     });
 });
 
-router.get('/search/:scene_name',function(req,res){
+router.get('/search/:scene_name',function(req,res,next){
     var params = url.parse(req.url, true).query;
     var scene_name=req.params.scene_name;
     var path='/search/search/?';
