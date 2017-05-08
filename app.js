@@ -25,7 +25,14 @@ app.use(lessMiddleware(path.join(__dirname,'/public'),{
 }));
 app.use(express.static(path.join(__dirname, '/public')));
 
+
 app.use('/', routes);
 app.use('/research', research);
 app.use('/article', article);
 app.use("/user",user);
+
+app.get('*', function(req, res){
+	res.render('404', {
+		title: '404 Not Found'
+	})
+});
