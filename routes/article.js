@@ -10,15 +10,19 @@ router.get('/:page',function(req,res,next){
     var path='/discover/get_travel_note_list/?';
     var search_word={'page': page};
     api.get(search_word,path).then(function (data) {
-        var article = {
-            nav: nav.create(req),
-            key: 'article',
-            point:'article',
-            title: "推荐游记",
-            articledata:data,
-            page: page
-        };
-        res.render('article/article', article);
+        if(data=="404 NOT FOUND!!"){
+            res.render('404',{title:data});
+        }else{
+            var article = {
+                nav: nav.create(req),
+                key: 'article',
+                point:'article',
+                title: "推荐游记",
+                articledata:data,
+                page: page
+            };
+            res.render('article/article', article);
+        }
     });
 });
 
@@ -28,14 +32,18 @@ router.get('/content/:id',function(req,res,next){
     var path='/discover/get_travel_note/?';
     var search_word={'id': id};
     api.get(search_word,path).then(function (data) {
-        var content = {
-            nav: nav.create(req),
-            key: 'content',
-            point:'article',
-            title: "游记内容",
-            condata:data
-        };
-        res.render('article/content', content);
+        if(data=="404 NOT FOUND!!"){
+            res.render('404',{title:data});
+        }else{
+            var content = {
+                nav: nav.create(req),
+                key: 'content',
+                point:'article',
+                title: "游记内容",
+                condata:data
+            };
+            res.render('article/content', content);
+        }
     });
 });
 

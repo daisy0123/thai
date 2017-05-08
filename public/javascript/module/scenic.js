@@ -175,39 +175,42 @@ define(function (require, exports, module) {
                     var url = "/research/comment";
                     var data = {scene: scene, offset: offset, lang: lang};
                     api.send(url, "post", data).then(function (result) {
-                        if (result.data.comments) {
-                            var add = self.add_com(result);
-                            var tag = "";
-                            if(result.data.adj_words=="暂无标签"){
-                                tag="暂无标签"
-                            }else{
-                                if( result.data.adj_words){
-                                    for (var i = 0; i < result.data.adj_words.words.length; i++) {
-                                        tag = tag + "<span>" + result.data.adj_words.words[i] + "[" + result.data.adj_words.values[i] + "]" + "</span>"
+                        if(result=="404 NOT FOUND!!"){
+                            alert("暂无此类评论！");
+                        }else{
+                            if (result.data.comments) {
+                                var add = self.add_com(result);
+                                var tag = "";
+                                if(result.data.adj_words=="暂无标签"){
+                                    tag="暂无标签"
+                                }else{
+                                    if( result.data.adj_words){
+                                        for (var i = 0; i < result.data.adj_words.words.length; i++) {
+                                            tag = tag + "<span>" + result.data.adj_words.words[i] + "[" + result.data.adj_words.values[i] + "]" + "</span>"
+                                        }
                                     }
                                 }
-                            }
-                            if (result.lang == "chi") {
-                                chi_tag.append(tag);
-                                chi_com.append(add);
-                            } else if (result.lang == "eng") {
-                                eng_tag.append(tag);
-                                eng_com.append(add);
-                            } else if (result.lang == "thai") {
-                                thai_tag.append(tag);
-                                thai_com.append(add);
-                            }
-                            offset = offset + 1;
-                            event.translate();
-                        }else {
-                            if($(".com-com").html()==" "){
-                                $(".com-com").append('你已经看完所有评论！');
+                                if (result.lang == "chi") {
+                                    chi_tag.append(tag);
+                                    chi_com.append(add);
+                                } else if (result.lang == "eng") {
+                                    eng_tag.append(tag);
+                                    eng_com.append(add);
+                                } else if (result.lang == "thai") {
+                                    thai_tag.append(tag);
+                                    thai_com.append(add);
+                                }
+                                offset = offset + 1;
+                                event.translate();
+                            }else {
+                                if($(".com-com").html()==" "){
+                                    $(".com-com").append('你已经看完所有评论！');
+                                }
                             }
                         }
                     });
                 }
             });
-
         }
     };
     var event = {
@@ -300,20 +303,24 @@ define(function (require, exports, module) {
             var scene = $(".scene_name").html();
             var data = {scene: scene};
             api.send(url, "post", data).then(function (result) {
-                if(result.tag.bar){
-                    if ((result.tag.bar.score.length) > 0) {
-                        chart.bar(result.tag.bar.top_words, result.tag.bar.score, 'bar-chart-page');
+                if(result=="404 NOT FOUND!!"){
+                    $(".chart-show").append("暂无信息");
+                }else{
+                    if(result.tag.bar){
+                        if ((result.tag.bar.score.length) > 0) {
+                            chart.bar(result.tag.bar.top_words, result.tag.bar.score, 'bar-chart-page');
+                        }
                     }
-                }
-                if(result.tag.pie){
-                    if ((result.tag.pie.chi.data.length) > 0) {
-                        chart.pie(result.tag.pie.chi.color, "中", result.tag.pie.chi.data, "pie1-chart-page");
-                    }
-                    if ((result.tag.pie.eng.data.length) > 0) {
-                        chart.pie(result.tag.pie.eng.color, "美", result.tag.pie.eng.data, "pie2-chart-page");
-                    }
-                    if ((result.tag.pie.thai.data.length) > 0) {
-                        chart.pie(result.tag.pie.thai.color, "泰", result.tag.pie.thai.data, "pie3-chart-page");
+                    if(result.tag.pie){
+                        if ((result.tag.pie.chi.data.length) > 0) {
+                            chart.pie(result.tag.pie.chi.color, "中", result.tag.pie.chi.data, "pie1-chart-page");
+                        }
+                        if ((result.tag.pie.eng.data.length) > 0) {
+                            chart.pie(result.tag.pie.eng.color, "美", result.tag.pie.eng.data, "pie2-chart-page");
+                        }
+                        if ((result.tag.pie.thai.data.length) > 0) {
+                            chart.pie(result.tag.pie.thai.color, "泰", result.tag.pie.thai.data, "pie3-chart-page");
+                        }
                     }
                 }
             });
@@ -328,7 +335,11 @@ define(function (require, exports, module) {
                 var init = parent.find(".p-com").html();
                 var data = {scene: scene, index: index, lang: lang};
                 api.send(url, "post", data).then(function (result) {
-                    parent.find(".p-com").html(result.content);
+                    if(result=="404 NOT FOUND!!"){
+                        alert("暂无此评论的翻译！");
+                    }else{
+                        parent.find(".p-com").html(result.content);
+                    }
                 });
             });
         }

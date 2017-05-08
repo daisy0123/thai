@@ -34,7 +34,11 @@ var api = {
                 } catch (e) {
                     console.error(e.message);
                 }
-                deferred.resolve(JSON.parse(str));
+                if(str=="404 NOT FOUND!!"){
+                    deferred.resolve(str);
+                }else{
+                    deferred.resolve(JSON.parse(str));
+                }
             });
         });
         req.on('error', function (err) {
@@ -73,7 +77,11 @@ var api = {
                 } catch (e) {
                     console.error(e.message);
                 }
-                deferred.resolve(JSON.parse(str));
+                if(str=="404 NOT FOUND!!"){
+                    deferred.resolve(str);
+                }else{
+                    deferred.resolve(JSON.parse(str));
+                }
             });
         });
         req.on('error', function (err) {

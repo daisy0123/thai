@@ -19,7 +19,9 @@ define(function (require,exports,module) {
             var search_small_a=$(".search_small_a");
 
             api.send(url,"post",data).then(function (result){
-                if(result){
+                if(result=="404 NOT FOUND!!"){
+                    alert("没有相关游记!!");
+                } else if(result){
                     for(var i=0;i<result.length;i++){
                         search_a[i].setAttribute("href","/article/content/"+result[i].id);
                         search_img[i].setAttribute("src",result[i].picture);

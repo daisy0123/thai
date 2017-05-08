@@ -25,7 +25,8 @@ requirejs.config({
         'scenic' : 'module/scenic',
         'search': 'module/search',
         'research':"module/research",
-        'article':"module/article"
+        'article':"module/article",
+        'bigSearch':"module/bigSearch"
     },
 
     shim : {

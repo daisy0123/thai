@@ -10,19 +10,23 @@ router.get('/:page',function(req,res,next){
     var path='/search/hotsearch/?';
     var search_word={'page': page};
     api.get(search_word,path).then(function (data) {
-        var mess=new Array();
-        for(var i=0;i<data.length;i++){
-            mess[i]=JSON.parse(data[i]);
+        if(data=="404 NOT FOUND!!"){
+            res.render('404',{title:data});
+        }else{
+            var mess=new Array();
+            for(var i=0;i<data.length;i++){
+                mess[i]=JSON.parse(data[i]);
+            }
+            var research = {
+                nav: nav.create(req),
+                key: 'research',
+                point:'research',
+                title: "热门搜索",
+                hotsearch: mess,
+                page: page
+            };
+            res.render('research/research', research);
         }
-        var research = {
-            nav: nav.create(req),
-            key: 'research',
-            point:'research',
-            title: "热门搜索",
-            hotsearch: mess,
-            page: page
-        };
-        res.render('research/research', research);
     });
 });
 
@@ -32,14 +36,18 @@ router.get('/scenic/:scene_name',function(req,res,next){
     var path='/search/search/?';
     var search_word={'search_word':scene_name};
     api.get(search_word,path).then(function (data) {
-        var scenic = {
-            nav: nav.create(req),
-            key: 'scenic',
-            point:'research',
-            title: "景点详情",
-            scenic:data
-        };
-        res.render('research/scenic', scenic);
+        if(data=="404 NOT FOUND!!"){
+            res.render('404',{title:data});
+        }else{
+            var scenic = {
+                nav: nav.create(req),
+                key: 'scenic',
+                point:'research',
+                title: "景点详情",
+                scenic:data
+            };
+            res.render('research/scenic', scenic);
+        }
     });
 });
 
@@ -50,16 +58,20 @@ router.get('/bigSearch/:scene_name/:offset',function(req,res,next){
     var path='/search/get_scene_list/?';
     var search_word={'scene_name': scene,offset:offset};
     api.get(search_word,path).then(function (data) {
-        var bigSearch = {
-            nav: nav.create(req),
-            key: 'bigSearch',
-            point:'research',
-            title: "热门搜索",
-            hotsearch: data,
-            page: offset,
-            scene_name:scene
-        };
-        res.render('research/bigSearch', bigSearch);
+        if(data=="404 NOT FOUND!!"){
+            res.render('404',{title:data});
+        }else{
+            var bigSearch = {
+                nav: nav.create(req),
+                key: 'bigSearch',
+                point:'research',
+                title: "热门搜索",
+                hotsearch: data,
+                page: offset,
+                scene_name:scene
+            };
+            res.render('research/bigSearch', bigSearch);
+        }
     });
 });
 
@@ -78,14 +90,18 @@ router.get('/search/:scene_name',function(req,res,next){
     var path='/search/search/?';
     var search_word={'search_word':scene_name};
     api.get(search_word,path).then(function (data) {
-        var scene = {
-            nav: nav.create(req),
-            key: 'search',
-            point:'research',
-            title: "景点查询",
-            scene:data
-        };
-        res.render('research/search', scene);
+        if(data=="404 NOT FOUND!!"){
+            res.render('404',{title:data});
+        }else{
+            var scene = {
+                nav: nav.create(req),
+                key: 'search',
+                point:'research',
+                title: "景点查询",
+                scene:data
+            };
+            res.render('research/search', scene);
+        }
     });
 });
 
