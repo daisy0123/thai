@@ -338,7 +338,11 @@ define(function (require, exports, module) {
                     if(result=="404 NOT FOUND!!"){
                         alert("暂无此评论的翻译！");
                     }else{
-                        parent.find(".p-com").html(result.content);
+                        if(lang=="eng"){
+                            parent.find(".p-com").append("<p>中文翻译："+result.content.chi+"</p>");
+                        }else if(lang=="thai"){
+                            parent.find(".p-com").append("<p>中文翻译："+result.content.chi+"</p><p>英文翻译："+result.content.eng+"</p>");
+                        }
                     }
                 });
             });
