@@ -156,9 +156,9 @@ define(function (require, exports, module) {
             var chi_com = $(".chi-com");
             var eng_com = $(".eng-com");
             var thai_com = $(".thai-com");
-            var chi_tag=$(".chi-tag");
-            var eng_tag=$(".eng-tag");
-            var thai_tag=$('.thai-tag');
+            var chi_tag = $(".chi-tag");
+            var eng_tag = $(".eng-tag");
+            var thai_tag = $('.thai-tag');
             var scene = $(".scene_name").html();
             var offset = 0;
             chi_com.html(" ");
@@ -175,16 +175,16 @@ define(function (require, exports, module) {
                     var url = "/research/comment";
                     var data = {scene: scene, offset: offset, lang: lang};
                     api.send(url, "post", data).then(function (result) {
-                        if(result=="404 NOT FOUND!!"){
+                        if (result == "404 NOT FOUND!!") {
                             alert("暂无此类评论！");
-                        }else{
+                        } else {
                             if (result.data.comments) {
                                 var add = self.add_com(result);
                                 var tag = "";
-                                if(result.data.adj_words=="暂无标签"){
-                                    tag="暂无标签"
-                                }else{
-                                    if( result.data.adj_words){
+                                if (result.data.adj_words == "暂无标签") {
+                                    tag = "暂无标签"
+                                } else {
+                                    if (result.data.adj_words) {
                                         for (var i = 0; i < result.data.adj_words.words.length; i++) {
                                             tag = tag + "<span>" + result.data.adj_words.words[i] + "[" + result.data.adj_words.values[i] + "]" + "</span>"
                                         }
@@ -202,8 +202,8 @@ define(function (require, exports, module) {
                                 }
                                 offset = offset + 1;
                                 event.translate();
-                            }else {
-                                if($(".com-com").html()==" "){
+                            } else {
+                                if ($(".com-com").html() == " ") {
                                     $(".com-com").append('你已经看完所有评论！');
                                 }
                             }
@@ -303,15 +303,15 @@ define(function (require, exports, module) {
             var scene = $(".scene_name").html();
             var data = {scene: scene};
             api.send(url, "post", data).then(function (result) {
-                if(result=="404 NOT FOUND!!"){
+                if (result == "404 NOT FOUND!!") {
                     $(".chart-show").append("暂无信息");
-                }else{
-                    if(result.tag.bar){
+                } else {
+                    if (result.tag.bar) {
                         if ((result.tag.bar.score.length) > 0) {
                             chart.bar(result.tag.bar.top_words, result.tag.bar.score, 'bar-chart-page');
                         }
                     }
-                    if(result.tag.pie){
+                    if (result.tag.pie) {
                         if ((result.tag.pie.chi.data.length) > 0) {
                             chart.pie(result.tag.pie.chi.color, "中", result.tag.pie.chi.data, "pie1-chart-page");
                         }
@@ -325,23 +325,33 @@ define(function (require, exports, module) {
                 }
             });
         },
+       //点击翻译
         'translate': function () {
             var scene = $(".scene_name").html();
             $(".tranlation").click(function () {
                 var index = $(this).attr("id");
                 var parent = $(this).parents(".comment-show");
+                var p_com = parent.find(".p-com");
                 var lang = parent.attr("id");
                 var url = "/research/translate";
                 var init = parent.find(".p-com").html();
                 var data = {scene: scene, index: index, lang: lang};
                 api.send(url, "post", data).then(function (result) {
-                    if(result=="404 NOT FOUND!!"){
+                    if (result == "404 NOT FOUND!!") {
                         alert("暂无此评论的翻译！");
-                    }else{
-                        if(lang=="eng"){
-                            parent.find(".p-com").append("<p>中文翻译："+result.content.chi+"</p>");
-                        }else if(lang=="thai"){
-                            parent.find(".p-com").append("<p>中文翻译："+result.content.chi+"</p><p>英文翻译："+result.content.eng+"</p>");
+                    } else {
+                        if (lang == "eng") {
+                            if (p_com.find("p").hasClass("chi-tran")) {
+                                $(this).attr("disabled",true);
+                            } else {
+                                p_com.append("<p class='chi-tran'>中文翻译：" + result.content.chi + "</p >");
+                            }
+                        } else if (lang == "thai") {
+                            if (p_com.find("p").hasClass("chi-tran") && p_com.find("p").hasClass("eng-tran")) {
+                                $(this).attr("disabled",true);
+                            } else {
+                                p_com.append("<p class='chi-tran'>中文翻译：" + result.content.chi + "</p><p class='eng-tran'>英文翻译" + result.content.eng + "</p >");
+                            }
                         }
                     }
                 });
